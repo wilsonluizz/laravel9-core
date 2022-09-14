@@ -1,0 +1,71 @@
+<div class="pb-5">
+    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Lado esquerdo do menu de navegação -->
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Início</a>
+                    </li>
+                </ul>
+
+
+                <!-- Lado direito do menu de navegação -->
+                <ul class="navbar-nav ms-auto">
+
+                    <!-- Sistema de busca -->
+                    <!-- TODO Sistema de busca -->
+                    <form class="d-flex d-none" role="search">
+                        <div class="input-group me-2">
+                            <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Pesquisar" aria-describedby="btn-pesquisa">
+                            <button class="btn btn-primary" type="submit" id="btn-pesquisa"><i class="bi-search"></i></button>
+                        </div>
+                    </form>
+                    
+                    <!-- Apenas se está logado -->
+                    @auth
+
+                        <!-- Usuários administradores -->
+                        @cannot('admin')
+                        <li class="nav-item">
+                            <a class="nav-link text-danger {{ request()->routeIs('admin.*') ? 'active' : '' }}" href="{{ route('admin') }}">
+                                Sistema
+                            </a>
+                        </li>
+                        @endcan
+
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                <!-- Alterar as próprias informações -->
+                                <a class="dropdown-item" href="{{ route('eu.edit', Auth::user()->id) }}">Minhas informações</a>
+
+                                <hr class="dropdown-divider">
+
+                                <!-- Fazer logout -->
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endauth
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
