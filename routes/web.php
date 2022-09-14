@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
     // ROTA DE AUTENTICAÇÃO
     Auth::routes(
         [
-            "register" => false,        // Desabilita o autocadastro
+            'register'  => false,        // Desabilita o autocadastro
+            'verify'    => false,        // Desabilita a verificação de e-mail
         ]
     );
 
