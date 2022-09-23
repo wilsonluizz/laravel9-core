@@ -45,7 +45,6 @@ use Illuminate\Support\Facades\Route;
         Route::group(['middleware' => ['auth']], function() {
             
             // Página inicial de administração. Conteúdo depende do nível de permissão
-            // TODO Criar controlador de administração /admin/
             Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin'); 
 
             // Rota de gerenciamento dos próprios dados
@@ -55,22 +54,25 @@ use Illuminate\Support\Facades\Route;
 
             // As rotas dentro desse grupo precisam ter passado por autenticação 
             // e ter regra (role) de administração (can: admin)
-            Route::group(['middleware' => ['can:admin']], function() {
+            
+            // TODO Reativar o middleware! (Linha abaixo)
+            // Route::group(['middleware' => ['can:admin']], function() {
+            Route::group([], function() {
                 
                 // Administração de usuários
-                // TODO Criar controlador de usuários /admin/usuarios
                 Route::resource('usuarios', 'App\Http\Controllers\UserController');
 
                 // Administração de perfis (roles)
-                // TODO Criar controlador de administração de perfis /admin/regras
-                Route::resource('regras', 'App\Http\Controllers\RoleController');
+                Route::resource('perfis', 'App\Http\Controllers\RoleController');
             });
 
+
             // As rotas dentro desse grupo precisam ter passado por autenticação 
-            // e ter regra (role) plus-ultra (can: kernel)
-            Route::group(['middleware' => ['can:kernel']], function() {
+            // e ter permissão de desenvolvedor (can: dev)
+            Route::group(['middleware' => ['can:dev']], function() {
                 
                 // Administração de kernel
+                Route::resource('permissoes', 'App\Http\Controllers\PermsController');
             });
 
         });
