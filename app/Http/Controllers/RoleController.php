@@ -41,16 +41,26 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-         // Apenas o nome do perfil é necessário. As permissões podem ser feitas depois
-         
-        //  $this->validate($request, [
-        //     'name' => 'required'
-        // ]);
 
-        // $perfil = Role::create(['name' => $request->input('name')]);
-        // $perfil->syncPermissions($request->input('permissoes'));
-        // return redirect()->route('perfis.index')->with(['mensagem' => 'Perfil criado com sucesso!', 'estilo' => 'bg-success']);
+         // Apenas o nome do perfil é requerido. As permissões podem ser inclusas depois (através de Edit)
+         $this->validate($request, [
+            'name' => 'required',
+        ]);
 
+        // Cria o perfil com nome e descrição
+        $perfil = Role::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+        ]);
+
+        // Se já foram selecionadas as permissões desse perfil, sincronizar
+        $perfil->syncPermissions($request->input('permissoes'));
+
+        // Retorna para a tela inicial com mensagem de sucesso na criação do perfil
+        return redirect()->route('perfis.index')->with([
+            'mensagem' => 'Perfil criado com sucesso!',
+            'estilo' => 'bg-success',
+        ]);
     }
 
     /**
@@ -61,6 +71,7 @@ class RoleController extends Controller
      */
     public function show($id)
     {
+        // Busca o perfil no Banco de dados
         $perfil = Role::find($id);
 
         // Buscar usuários que contém esse perfil;
@@ -74,7 +85,6 @@ class RoleController extends Controller
             $permissoesDoPerfil[$permissao['id']]['description'] = $permissao['description'];
             $permissoesDoPerfil[$permissao['id']]['hasPermission'] = ($perfil->hasAllPermissions($permissao['name']) ? true : false);
         }
-
 
         return view('admin.perfis.show', compact('perfil', 'usuarios', 'permissoesDoPerfil'));
     }

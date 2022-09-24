@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class CreatePermissionTables extends Migration
 {
     /**
-     * Run the migrations.
+     * Executa as migrações.
      *
      * @return void
      */
@@ -17,7 +17,7 @@ class CreatePermissionTables extends Migration
         $columnNames = config('permission.column_names');
 
         if (empty($tableNames)) {
-            throw new \Exception('Error: config/permission.php not loaded. Run [php artisan config:clear] and try again.');
+            throw new \Exception('Erro: config/permission.php não foi carregado. Execute [php artisan config:clear] e tente novamente.');
         }
 
         // CRIA A TABELA DE PERMISSÕES
@@ -98,7 +98,7 @@ class CreatePermissionTables extends Migration
     }
 
     /**
-     * Reverse the migrations.
+     * Reverte as migrações.
      *
      * @return void
      */
@@ -107,7 +107,8 @@ class CreatePermissionTables extends Migration
         $tableNames = config('permission.table_names');
 
         if (empty($tableNames)) {
-            throw new \Exception('Error: config/permission.php not found and defaults could not be merged. Please publish the package configuration before proceeding, or drop the tables manually.');
+            throw new \Exception('Erro: config/permission.php não encontrado e defaults não puderam realizar merge. 
+            Por favor, publique (publish) a configuração do pacote antes de prosseguir, ou exclua (drop) as tabelas manualmente.');
         }
 
         Schema::drop($tableNames['role_has_permissions']);
