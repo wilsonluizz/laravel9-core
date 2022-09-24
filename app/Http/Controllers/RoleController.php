@@ -41,7 +41,16 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // Apenas o nome do perfil é necessário. As permissões podem ser feitas depois
+         
+        //  $this->validate($request, [
+        //     'name' => 'required'
+        // ]);
+
+        // $perfil = Role::create(['name' => $request->input('name')]);
+        // $perfil->syncPermissions($request->input('permissoes'));
+        // return redirect()->route('perfis.index')->with(['mensagem' => 'Perfil criado com sucesso!', 'estilo' => 'bg-success']);
+
     }
 
     /**
@@ -52,7 +61,22 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $perfil = Role::find($id);
+
+        // Buscar usuários que contém esse perfil;
+        $usuarios = User::role($perfil)->get(['id', 'name', 'email']);
+
+        // Exibir permissões desse perfil
+        $todasAsPermissoes = Permission::get(['id', 'name', 'description']);
+        foreach($todasAsPermissoes as $permissao) {
+            $permissoesDoPerfil[$permissao['id']]['id'] = $permissao['id'];
+            $permissoesDoPerfil[$permissao['id']]['name'] = $permissao['name'];
+            $permissoesDoPerfil[$permissao['id']]['description'] = $permissao['description'];
+            $permissoesDoPerfil[$permissao['id']]['hasPermission'] = ($perfil->hasAllPermissions($permissao['name']) ? true : false);
+        }
+
+
+        return view('admin.perfis.show', compact('perfil', 'usuarios', 'permissoesDoPerfil'));
     }
 
     /**
