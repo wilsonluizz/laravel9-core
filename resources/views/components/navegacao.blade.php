@@ -34,10 +34,11 @@
 
                     <!-- Usuários administradores -->
                     @can('admin')
-                    <ul class="nav nav-pills">
-                        <li class="nav-item ">
-                            <a class="nav-link bg-danger text-white" href="{{ route('admin') }}">
-                                Admin
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-danger" href="{{ route('admin') }}">
+                                <i class="bi bi-gear-fill fs-5"></i>
+                                <span class="nav-label ms-1 d-none">Admin</span>
                             </a>
                         </li>
                     </ul>
@@ -45,8 +46,7 @@
 
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle ms-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            
-                            <i class="bi-person-circle h3"></i>
+                            <i class="bi-person-circle fs-5"></i>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdown">
@@ -55,15 +55,13 @@
                                 {{ Auth::user()->name }}
                             </span>
 
-                            {{-- <hr class="dropdown-divider"> --}}
-
                             <!-- Alterar as próprias informações -->
                             <a class="dropdown-item" href="{{ route('eu.edit', Auth::user()->id) }}">Minhas informações</a>
 
                             <hr class="dropdown-divider">
 
                             <!-- Fazer logout -->
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

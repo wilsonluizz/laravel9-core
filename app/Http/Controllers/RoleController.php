@@ -19,7 +19,7 @@ class RoleController extends Controller
     public function index()
     {
         $perfis = Role::all();
-        return view('admin.perfis.index',compact('perfis'));
+        return view('admin.perfis.index', compact('perfis'));
     }
 
     /**
@@ -29,8 +29,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $permissoes = Permission::all();
-        return view('admin.perfis.create', compact('permissoes'));
+        $perms = Permission::all();
+        return view('admin.perfis.create', compact('perms'));
     }
 
     /**
@@ -54,7 +54,7 @@ class RoleController extends Controller
         ]);
 
         // Se já foram selecionadas as permissões desse perfil, sincronizar
-        $perfil->syncPermissions($request->input('permissoes'));
+        $perfil->syncPermissions($request->input('perms'));
 
         // Retorna para a tela inicial com mensagem de sucesso na criação do perfil
         return redirect()->route('perfis.index')->with([
@@ -78,6 +78,7 @@ class RoleController extends Controller
         $usuarios = User::role($perfil)->get(['id', 'name', 'email']);
 
         // Exibir permissões desse perfil
+        // TODO: Revisar essa função
         $todasAsPermissoes = Permission::get(['id', 'name', 'description']);
         foreach($todasAsPermissoes as $permissao) {
             $permissoesDoPerfil[$permissao['id']]['id'] = $permissao['id'];
@@ -97,7 +98,9 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $perfil = Role::find($id);      // Resgata o ID do Perfil
+        $perms = Permission::all();
+        return view('admin.perfis.edit', compact('perfil','perms'));
     }
 
     /**
@@ -109,7 +112,18 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+
+        $perfil = Role::find($id);
+        $perfil->update($request->all());
+        $perfil->syncPermissions($request->input('perms'));
+        return redirect()->route('perfis.index')->with([
+            'mensagem' => 'Perfil e permissões alterados com sucesso!', 
+            'estilo' => 'bg-primary'
+        ]);
     }
 
     /**
@@ -120,6 +134,10 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Role::find($id)->delete();
+        return redirect()->route('perfis.index')->with([
+            'mensagem' => 'Perfil apagado com sucesso!',
+            'estilo' => 'bg-danger',
+        ]);
     }
 }

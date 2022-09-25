@@ -1,17 +1,7 @@
+<form action="{{ ($type == 'edit') ? route('usuarios.update', $usuario->id) : route('usuarios.store') }}" method="post">
 
-@if($type == 'edit')
-
-    <form action="{{ route('usuarios.update', $usuario->id) }}" method="post">
-        @csrf
-        @method('PUT')
-    
-@else
-
-    <form action="{{ route('usuarios.store') }}" method="post">
-        @csrf
-
-@endif
-
+    @csrf
+    @if($type == 'edit') @method('PUT') @endif
 
     <div class="card-header pb-1">
         <div class="row">
@@ -39,6 +29,7 @@
                     <button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Apagar {{ $usuario->name }}" id="confirmarExclusao">
                         {{-- 
                             FIXME: Habilitar modal para exclusão
+                            FIXME: Formulário para exclusão
                         --}}
                         <i class="bi bi-trash-fill me-1"></i>
                         Excluir usuário
@@ -167,17 +158,11 @@
 
             <div class="col-lg-2 text-end">
 
-                @if($type == 'edit') 
-                    <button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Editar usuário">
-                        <i class="bi bi-pencil-square mx-1"></i>
-                        Editar usuário
-                    </button>
-                @else
-                    <button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Salvar usuário">
-                        <i class="bi bi-save mx-1"></i>
-                        Salvar usuário
-                    </button>
-                @endif
+                <button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="{{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário">
+                    <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} mx-1"></i>
+                    {{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário
+                </button>
+                
             </div>
         </div>
 
