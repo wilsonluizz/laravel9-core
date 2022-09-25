@@ -1,5 +1,4 @@
-<nav class="navbar-dark bg-dark shadow-lg position-fixed p-1 min-vh-100 pt-4 d-none d-sm-block" style="z-index: 0">
-    
+<nav class="navbar-dark bg-dark shadow-lg p-1 min-vh-100 pt-5 d-none d-sm-block">
     <ul class="nav nav-pills nav-flush flex-sm-column flex-row">
 
         @can('admin')

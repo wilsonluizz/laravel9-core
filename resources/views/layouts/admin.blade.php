@@ -29,27 +29,23 @@
     </head>
 
 <body>
+    
+    <div class="mb-5">
+        <x-navegacao />
+    </div>
+
+    <div class="position-fixed vh-100 overflow-scroll">
+        <x-navegacao_admin />
+    </div>
+    
     <div id="app">
-        
-        <div class="container-fluid min-vh-100">
-            <div class="row">
-                {{-- Navegação (Superior) --}}
-                <x-navegacao />
+        <main class="pt-5 ps-5 ms-4">
+            <div class="container-fluid">
+                @yield('content')
             </div>
+        </main>
+    </div>
 
-            <div class="row">
-
-                {{-- Navegação lateral --}}
-                <div class="col-sm-1 ps-0">
-                    <x-navegacao_admin />
-                </div>
-                
-                {{-- Conteúdo principal --}}
-                <div class="col-sm-11 pt-4 ps-3">
-                    @yield('content')
-                </div>
-            </div>
-        </div>
 
         {{-- 
             TOASTS
