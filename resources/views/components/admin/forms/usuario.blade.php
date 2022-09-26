@@ -9,7 +9,7 @@
 
     <div class="card-header pb-1">
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-10">
                 <h3 class="pt-1">
                     <i class="bi bi-person-fill me-3"></i> 
                     <span class="text-secondary">Usuário |</span>
@@ -27,7 +27,7 @@
                 </h3>
             </div>
 
-            <div class="col-sm-2 text-end">
+            <div class="col-2 text-end">
                 
                 @if(!is_null($type))
                 
@@ -42,7 +42,7 @@
                                 
                                 {{-- Botão para telas pequenas --}}
                                 <span class="d-xs-block d-lg-none">
-                                    <i class="bi bi-trash-fill mx-1"></i>
+                                    <i class="bi bi-trash-fill"></i>
                                 </span>    
                                 
                                 {{-- Botão para telas grandes --}}
@@ -62,13 +62,13 @@
 
                     <div class="d-xs-block d-lg-none">
                         <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-secondary">
-                            <i class="bi bi-pencil-square mx-1"></i>
+                            <i class="bi bi-pencil-square"></i>
                         </a>
                     </div>
 
                     <div class="d-none d-lg-block">
                         <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-secondary">
-                            <i class="bi bi-pencil-square mx-1"></i>
+                            <i class="bi bi-pencil-square"></i>
                             Editar usuário
                         </a>
                     </div>
@@ -84,7 +84,7 @@
     <div class="card-body">
         <div class="row pb-3">
 
-            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                 <h5>Informações pessoais</h5>
                 <p class="text-secondary">
                     <i class="fas fa-lock text-primary pr-2"></i>
@@ -99,7 +99,7 @@
             </div>
             
             
-            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+            <div class="col-12 col-sm-12 col-md-9 col-lg-9">
 
                 {{-- Nome --}}
                 <div class="row pb-4">
@@ -168,7 +168,7 @@
         {{-- Perfis --}}
         <div class="row">
 
-            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                 <h5>Perfis</h5>
                 <p class="text-secondary">
                     <i class="fas fa-lock text-primary pr-2"></i>
@@ -179,51 +179,62 @@
             </div>
             
             
-            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                <div class="row">
+            <div class="col-12 col-sm-12 col-md-9 col-lg-9">
+                <div class="row table-responsive">
 
-                    {{-- EDIT / CREATE || Exibe opção de permissões --}}
-                    @if(!is_null($type))
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-4">Perfil</small></th>
+                                <th class="col-8">Descrição do perfil</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(!is_null($type))
 
-                        @foreach($perfis as $p)
-                        <div class="row mb-1">
-                            <div class="col-lg-6">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" name="perfis[]" value="{{ $p->id }}" id="{{ $p->id }}" @if($type == 'edit') {{ ($usuario->hasRole($p) ? 'checked="checked"' : "") }} @endif>
-                                    <label class="form-check-label d-block pe-auto ms-3" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                @if(!is_null($p->description))
-                                    {{ $p->description }}
-                                @else
-                                    <span class="text-secondary">Nenhuma descrição fornecida.</span>
-                                @endif
-                            </div>
-                        </div>
-                        @endforeach
-
-                    @else
-
-                        @foreach($perfis as $p)
-                            @if($usuario->hasAllRoles($p->name))
-                                <div class="row mb-1">
-                                    <div class="col-lg-6">
-                                        <label><i class="bi bi-check me-2 fs-5 text-success"></i>{{ $p->name }}</label>
-                                    </div>
-                                    <div class="col-lg-6">
+                                @foreach($perfis as $p)
+                                <tr>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" name="perfis[]" value="{{ $p->id }}" id="{{ $p->id }}" @if($type == 'edit') {{ ($usuario->hasRole($p) ? 'checked="checked"' : "") }} @endif>
+                                            <label class="form-check-label d-block pe-auto ms-3" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
+                                        </div>
+                                    </td>
+                                    <td>
                                         @if(!is_null($p->description))
                                             {{ $p->description }}
                                         @else
                                             <span class="text-secondary">Nenhuma descrição fornecida.</span>
                                         @endif
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    
-                    @endif
+                                    </td>
+                                </tr>
+                                @endforeach
 
+                            @else
+
+                                @foreach($perfis as $p)
+                                    @if($usuario->hasAllRoles($p->name))
+                                        <tr>
+                                            <td>
+                                                <label><i class="bi bi-check me-2 fs-5 text-success"></i>{{ $p->name }}</label>
+                                            </td>
+                                            <td>
+                                                @if(!is_null($p->description))
+                                                    {{ $p->description }}
+                                                @else
+                                                    <span class="text-secondary">Nenhuma descrição fornecida.</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            
+                            @endif
+
+                        </tbody>
+                    </table>
+
+                    
 
                 </div>
             </div>
@@ -235,21 +246,21 @@
 
         <div class="row">
 
-            <div class="col-sm-10 mt-2">
+            <div class="col-10 mt-2">
                 <a class="text-muted text-decoration-none" href="{{ route('usuarios.index') }}">
                     <i class="bi bi-arrow-return-left"></i>
                     <span class="ms-2">Voltar @if(!is_null($type)) sem {{ ($type == 'create' ? 'criar usuário' : 'editar informações')  }} @else à página anterior @endif</span>
                 </a>
             </div>
 
-            <div class="col-sm-2 text-end">
+            <div class="col-2 text-end">
                 @if(!is_null($type))
                     <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="{{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário">
                         <span class="d-xs-block d-lg-none">
-                            <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} mx-1"></i>
+                            <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }}"></i>
                         </span>                    
                         <span class="d-none d-lg-block">
-                            <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} mx-1"></i>
+                            <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }}"></i>
                             {{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário
                         </span>                   
                     </button>

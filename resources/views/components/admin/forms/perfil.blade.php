@@ -6,7 +6,7 @@
     {{-- Identificação do formulário --}}
     <div class="card-header pb-1">
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-10">
                 <h3 class="pt-1">
                     <i class="bi bi-person-badge me-3"></i> 
                     <span class="text-secondary">Perfil |</span>
@@ -20,7 +20,7 @@
                 </h3>
             </div>
 
-            <div class="col-sm-2 text-end">
+            <div class="col-2 text-end">
             
                 {{-- Habilita exclusão caso tenha essa permissão --}}
                 @if($type == 'edit')
@@ -32,7 +32,7 @@
                     --}}
 
                     <span class="d-xs-block d-lg-none">
-                        <i class="bi bi-trash-fill mx-1"></i>
+                        <i class="bi bi-trash-fill"></i>
                     </span>                    
                     <span class="d-none d-lg-block">
                         <i class="bi bi-trash-fill me-1"></i>
@@ -116,8 +116,7 @@
                     <thead>
                         <tr>
                             <th class="col-lg-4">Permissão para</small></th>
-                            <th class="col-lg-6">Descrição da permissão</small></th>
-                            <th class="col-lg-2 text-center">Ações</th>
+                            <th class="col-lg-8">Descrição da permissão</small></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -143,10 +142,6 @@
                                     <span class="text-secondary">Nenhuma descrição fornecida.</span>
                                 @endif
                             </td>
-
-                            <td class="text-center">
-                                Ações
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -160,20 +155,20 @@
     <div class="card-footer">
 
         <div class="row">
-            <div class="col-sm-10 mt-2">
+            <div class="col-10 mt-2">
                 <a class="text-muted text-decoration-none" href="{{ route('perfis.index') }}">
                     <i class="bi bi-arrow-return-left"></i>
                     <span class="ms-2">Voltar sem alterar nada</span>
                 </a>
             </div>
 
-            <div class="col-sm-2 text-end">
+            <div class="col-2 text-end">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="{{ ($type == 'edit') ? "Editar" : "Salvar" }} perfil">
                     <span class="d-xs-block d-lg-none">
-                        <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} mx-1"></i>
+                        <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }}"></i>
                     </span>                    
                     <span class="d-none d-lg-block">
-                        <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} mx-1"></i>
+                        <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }}"></i>
                         {{ ($type == 'edit') ? "Editar" : "Salvar" }} perfil
                     </span>                   
                 </button>
