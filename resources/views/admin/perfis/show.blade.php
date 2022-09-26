@@ -7,14 +7,32 @@
 
             <div class="card-header pb-1">
                 <div class="row">
-                    <div class="col-lg-10">
+                    <div class="col-sm-10">
                         <h3 class="pt-1">
                             <i class="bi bi-person-badge me-3"></i> 
                             <span class="text-secondary">Perfil |</span>
                             {{ $perfil->name }}
                         </h3>
                     </div>
-                    <div class="col-lg-2 text-end"></div>
+
+                    <div class="col-sm-2 text-end">
+                        @can('admin')
+
+                            <div class="d-xs-block d-lg-none">
+                                <a href="{{ route('perfis.edit', $perfil->id) }}" class="btn btn-secondary">
+                                    <i class="bi bi-pencil-square mx-1"></i>
+                                </a>
+                            </div>
+
+                            <div class="d-none d-lg-block">
+                                <a href="{{ route('perfis.edit', $perfil->id) }}" class="btn btn-secondary">
+                                    <i class="bi bi-pencil-square mx-1"></i>
+                                    Editar perfil
+                                </a>
+                            </div>
+
+                        @endcan
+                    </div>
                 </div>
             </div>
 
@@ -37,31 +55,25 @@
                         {{-- Nome --}}
                         <div class="row pb-4">
                             <div class="col">
-
-                                <label for="nomeDoPerfil" class="d-block fw-bold">
-                                    Nome do perfil
+                                <label for="nome" class="d-block fw-bold">
+                                    Perfil
                                 </label>
-                                <p class="lead">{{ $perfil->name }}</p>
-
-                                <small id="dicaPerfil" class="form-text text-muted d-none"> 
-                                    <strong>Obrigatório</strong>. Dica: Você pode utilizar um cargo como base para desenhar o perfil de usuários.
-                                </small>
-
+                                {{ $perfil->name }}
                             </div>
                         </div>
 
-                        {{-- Descrição --}}
-                        <div class="row">
+                        {{-- Nome --}}
+                        <div class="row pb-4">
                             <div class="col">
-
-                                <label for="descricaoDoPerfil" class="d-block">
+                                <label for="nome" class="d-block fw-bold">
                                     Descrição do perfil
                                 </label>
-                                <textarea rows="2" name="description" class="form-control d-none" id="descricaoDoPerfil" aria-describedby="dicaDescricaoPerfil"></textarea>
-                                <p class="lead">@if(!is_null($perfil->description)) {{ $perfil->description }} @else <span class="text-secondary">Nenhuma descrição fornecida.</span> @endif</p>
-                                <small id="dicaDescricaoPerfil" class="form-text text-muted d-none"> 
-                                    Opcional. Você pode incluir uma descrição sobre esse perfil.
-                                </small>
+
+                                @if(!is_null($perfil->description)) 
+                                    {{ $perfil->description }} 
+                                @else 
+                                    <span class="text-secondary">Nenhuma descrição fornecida.</span> 
+                                @endif
 
                             </div>
                         </div>
@@ -74,7 +86,7 @@
                 {{-- Permissões --}}
                 <div class="row pb-4">
 
-                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="col-xs-12 col-sm-12 col-md-3">
                         <h5>Permissões</h5>
                         <p class="text-secondary">
                             <span class="badge bg-danger me-1">Atenção</span>
@@ -82,29 +94,28 @@
                         </p> 
                     </div>
                     
-                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                        
-                        <div class="row mb-2">
-                            <div class="col-lg-6 fw-bold">Permissão</div>
-                            <div class="col-lg-6 fw-bold">Descrição</div>
+                    <div class="col-xs-12 col-sm-12 col-md-9">
+
+                        <div class="row table-responsive">
+
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="col-lg-4">Permissão para</small></th>
+                                        <th class="col-lg-8">Descrição</small></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($permissoesDoPerfil as $p)
+                                    <tr>
+                                        <td>{{ $p['name'] }}</td>
+                                        <td>{{ $p['description'] }}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
                         </div>
-
-                        @foreach($permissoesDoPerfil as $p)
-                        <div class="row mb-1">
-                            <div class="col-lg-6">
-                                
-                                <label class="form-check-label" for="{{ $p['id'] }}" role="button">
-                                    @if($p['hasPermission']) <i class="bi bi-check text-success fs-4"></i> @else <i class="bi bi-x text-danger fs-4"></i> @endif
-                                    {{ $p['name'] }}
-                                </label>
-
-                            </div>
-                            <div class="col-lg-6">
-                                {{ $p['description'] }}
-                            </div>
-                        </div>
-                        @endforeach
-
                     </div>
                 </div>
 
@@ -113,7 +124,7 @@
                 {{-- Usuários --}}
                 <div class="row">
 
-                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                    <div class="col-xs-12 col-sm-12 col-md-3">
                         <h5>Usuários</h5>
                         <p class="text-secondary">
                             <span class="badge bg-danger me-1">Atenção</span>
@@ -121,16 +132,15 @@
                         </p> 
                     </div>
                     
-                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <div class="col-xs-12 col-sm-12 col-md-9">
                         
                         <div class="row table-responsive">
 
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-lg-5">Nome</small></th>
-                                        <th class="col-lg-5">E-mail</small></th>
-                                        <th class="col-lg-2 text-center">Ações</th>
+                                        <th class="col-lg-6">Nome</small></th>
+                                        <th class="col-lg-6">E-mail</small></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -138,9 +148,6 @@
                                     <tr>
                                         <td>{{ $u->name }}</td>
                                         <td>{{ $u->email }}</td>
-                                        <td class="text-center">
-                                            Ações
-                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 // Permissões
 use Spatie\Permission\Models\Role;
-// use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -69,26 +69,30 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //  // Resgata o ID do usuário
-        //  $usuario = User::find($id);
+         // Resgata o ID do usuário
+         $usuario = User::find($id);
         
-        //  /**
-        //   * Exibe os perfis e permissões do usuário (true/false)
-        //   */
-         
-        //  $todosOsPerfis = Role::where('kernel', '!=', 1)->get(['id', 'name']);               // Exibe todos os perfis exceto Kernel
-        //  foreach($todosOsPerfis as $perfil) {
-        //      $perfisDoUsuario[$perfil['id']]['nome'] = $perfil['name'];
-        //      $perfisDoUsuario[$perfil['id']]['tem_perfil'] = ($usuario->hasAllRoles($perfil['name']) ? true : false);
-        //  }
+         $todosOsPerfis = Role::all();
+
+         // Exibe apenas os perfis que o usuário possui
+         foreach($todosOsPerfis as $perfil) {
+            if($usuario->hasAllRoles($perfil['name'])) {
+                $perfisDoUsuario[$perfil['id']]['name'] = $perfil['name'];
+                $perfisDoUsuario[$perfil['id']]['description'] = $perfil['description'];
+            }
+         }
  
-        //  $todasAsPermissoes = Permission::where('kernel', '!=', 1)->get(['id', 'name']);     // Exibe todas as permissões exceto Kernel
-        //  foreach($todasAsPermissoes as $permissao) {
-        //      $permissoesDoUsuario[$permissao['id']]['nome'] = $permissao['name'];
-        //      $permissoesDoUsuario[$permissao['id']]['tem_permissao'] = ($usuario->hasAllPermissions($permissao['name']) ? true : false);
-        //  }
+        //  Exibe as permissões que o usuário possui
+         $todasAsPermissoes = Permission::all();
+
+         foreach($todasAsPermissoes as $permissao) {
+            if($usuario->hasAllPermissions($permissao['name'])) {
+                $permissoesDoUsuario[$permissao['id']]['name'] = $permissao['name'];
+                $permissoesDoUsuario[$permissao['id']]['description'] = $permissao['description'];
+            }
+         }
  
-        //  return view('admin.usuarios.show', compact('usuario', 'perfisDoUsuario', 'permissoesDoUsuario'));
+         return view('admin.usuarios.show', compact('usuario', 'perfisDoUsuario', 'permissoesDoUsuario'));
     }
 
     /**
@@ -99,7 +103,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $usuario = User::find($id);                     // Resgata o ID do usuário
+        $usuario = User::find($id);
         $perfis = Role::all();
         return view('admin.usuarios.edit', compact('usuario', 'perfis'));
     }

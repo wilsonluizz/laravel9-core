@@ -5,23 +5,21 @@
 
     <div class="card-header pb-1">
         <div class="row">
-            <div class="col-lg-10">
+            <div class="col-sm-10">
                 <h3 class="pt-1">
                     <i class="bi bi-person-fill me-3"></i> 
-                    Usuário |
-                    <span class="text-secondary">
+                    <span class="text-secondary">Usuário |</span>
 
-                        @if($type == 'edit') 
-                            Editar {{ $usuario->name }} 
-                        @else 
-                            Criar 
-                        @endif
+                    @if($type == 'edit') 
+                        Editar {{ $usuario->name }} 
+                    @else 
+                        Criar 
+                    @endif
 
-                    </span>
                 </h3>
             </div>
 
-            <div class="col-lg-2 text-end">
+            <div class="col-sm-2 text-end">
                 
                 {{-- Habilita exclusão caso tenha essa permissão --}}
                 @if($type == 'edit')
@@ -31,8 +29,15 @@
                             FIXME: Habilitar modal para exclusão
                             FIXME: Formulário para exclusão
                         --}}
-                        <i class="bi bi-trash-fill me-1"></i>
-                        Excluir usuário
+
+                        <span class="d-xs-block d-lg-none">
+                            <i class="bi bi-trash-fill mx-1"></i>
+                        </span>                    
+                        <span class="d-none d-lg-block">
+                            <i class="bi bi-trash-fill me-1"></i>
+                            Excluir usuário
+                        </span>        
+
                     </button>
                     @endcan
                 @endif
@@ -41,9 +46,8 @@
         </div>
     </div>
     
+    {{-- Informações pessoais --}}
     <div class="card-body">
-
-        {{-- Informações pessoais --}}
         <div class="row pb-3">
 
             <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
@@ -149,20 +153,24 @@
     <div class="card-footer">
 
         <div class="row">
-            <div class="col-lg-10 mt-1">
-                <a class="text-muted pt-2 text-decoration-none" href="{{ route('usuarios.index') }}">
+
+            <div class="col-sm-10 mt-2">
+                <a class="text-muted text-decoration-none" href="{{ route('usuarios.index') }}">
                     <i class="bi bi-arrow-return-left"></i>
                     <span class="ms-2">Voltar sem alterar nada</span>
                 </a>
             </div>
 
-            <div class="col-lg-2 text-end">
-
-                <button type="submit" class="btn btn-sm btn-primary" data-toggle="tooltip" title="{{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário">
-                    <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} mx-1"></i>
-                    {{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário
+            <div class="col-sm-2 text-end">
+                <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="{{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário">
+                    <span class="d-xs-block d-lg-none">
+                        <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} mx-1"></i>
+                    </span>                    
+                    <span class="d-none d-lg-block">
+                        <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} mx-1"></i>
+                        {{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário
+                    </span>                   
                 </button>
-                
             </div>
         </div>
 
