@@ -26,77 +26,74 @@
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
         <link href="{{ asset('css/navegacao_admin.css') }}" rel="stylesheet"> 
         --}}
+        
     </head>
 
-<body>
-    
-    <div class="mb-5">
-        <x-navegacao />
-    </div>
+    <body>
+        <div class="pb-5">
+            <x-navegacao />
+        </div>
 
-    <div class="position-fixed vh-100 overflow-scroll">
-        <x-navegacao_admin />
-    </div>
-    
-    <div id="app">
-        <main class="pt-5 ps-5 ms-4">
-            <div class="container-fluid">
+        <div class="position-fixed vh-100 overflow-scroll">
+            <x-navegacao_admin />
+        </div>
+        
+        <div class="container-fluid pt-5">
+            <div id="app" class="ps-sm-5 ms-sm-4">
                 @yield('content')
             </div>
-        </main>
-    </div>
+        </div>
 
+            {{-- 
+                TOASTS
+                TODO Revisar TOASTS 
+            --}}
 
-        {{-- 
-            TOASTS
-            TODO Revisar TOASTS 
-        --}}
+            <div style="position: absolute; bottom: 10px; right: 10px">
 
-        <div style="position: absolute; bottom: 10px; right: 10px">
-
-            {{-- Mensagens genéricas de callback --}}
-            @if(Session::has('mensagem'))
-            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-body {{ Session::get('estilo') }} text-white">
-                    {{ Session::get('mensagem') }}
-                    <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-            @endif
-
-            {{-- Mensagens de erro --}}
-            @if (count($errors) > 0)
-                @foreach ($errors->all() as $erro)
+                {{-- Mensagens genéricas de callback --}}
+                @if(Session::has('mensagem'))
                 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-body bg-danger text-white">
-                        {{ $erro }}
+                    <div class="toast-body {{ Session::get('estilo') }} text-white">
+                        {{ Session::get('mensagem') }}
                         <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 </div>
-                @endforeach
-            @endif
-        </div>
+                @endif
 
-    </div>
-</body>
+                {{-- Mensagens de erro --}}
+                @if (count($errors) > 0)
+                    @foreach ($errors->all() as $erro)
+                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-body bg-danger text-white">
+                            {{ $erro }}
+                            <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    @endforeach
+                @endif
+            </div>
+
+        </div>
+    </body>
 
 {{-- 
     TODO Revisar scripts
     Scripts 
 --}}
-<script src="{{ asset('js/app.js') }}"></script>
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 
-{{-- Scripts customizados, se houver --}}
+{{-- Scripts customizados, se houver
 @hasSection ('scripts')
     @yield('scripts')
-@endif
+@endif --}}
 
 {{-- Scripts comuns --}}
-<script>
+{{-- <script>
     $('.navegacao_admin').hover(function(e) {
         $('.navegacao_admin').toggleClass('collapsed');
     });
@@ -104,5 +101,5 @@
     $('[data-toggle="popover"]').popover();
     // Controle dos toasts
     $('.toast').toast({ delay: 3000 }).toast('show');
-</script>
+</script> --}}
 </html>

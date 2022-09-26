@@ -4,18 +4,19 @@
     <div class="row row-cols-1 pb-3">
         <div class="col">
             <div class="card">
+
                 <div class="card-header pb-1">
                     <div class="row">
-                        <div class="col-sm-10">
+                        <div class="col-10">
                             <h3 class="pt-1"><i class="bi bi-people-fill me-3"></i> Usuários</h3>
                         </div>
-                        <div class="col-sm-2 text-end">
+                        <div class="col-2 text-end">
                             <a class="btn btn-primary" href="{{ route('usuarios.create') }}" data-toggle="tooltip" title="Criar novo usuário">
-                                <span class="d-xs-block d-lg-none">
-                                    <i class="bi bi-plus-lg mx-1"></i>
+                                <span class="d-lg-none">
+                                    <i class="bi bi-plus-lg"></i>
                                 </span>
                                 <span class="d-none d-lg-block">
-                                    <i class="bi bi-plus-lg mx-1"></i>
+                                    <i class="bi bi-plus-lg me-1"></i>
                                     Novo usuário
                                 </span>
                             </a>
@@ -27,11 +28,11 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th class="col-sm-3">Nome</th>
-                                <th class="col-sm-3">E-mail</th>
-                                <th class="col-sm-3">Perfis de usuário</th>
-                                <th class="col-sm-1">Criado em</th>
-                                <th class="col-sm-2 text-center">Ações</th>
+                                <th class="col-3">Nome</th>
+                                <th class="col-3">E-mail</th>
+                                <th class="col-3">Perfis de usuário</th>
+                                <th class="col-1">Criado em</th>
+                                <th class="col-2 text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -77,14 +78,14 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-sm-10 mt-1">
+                        <div class="col-10 mt-1">
                             <a class="text-muted pt-2 text-decoration-none" href="{{ route('admin') }}">
                                 <i class="bi bi-arrow-return-left"></i>
                                 <span class="ms-2">Voltar à página anterior</span>
                             </a>
                         </div>
     
-                        <div class="col-sm-2 text-end"></div>
+                        <div class="col-2 text-end"></div>
                     </div>
                 </div>
             </div>

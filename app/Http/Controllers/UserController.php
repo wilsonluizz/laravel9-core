@@ -70,29 +70,12 @@ class UserController extends Controller
     public function show($id)
     {
          // Resgata o ID do usuário
-         $usuario = User::find($id);
-        
-         $todosOsPerfis = Role::all();
+        $usuario = User::find($id);
 
-         // Exibe apenas os perfis que o usuário possui
-         foreach($todosOsPerfis as $perfil) {
-            if($usuario->hasAllRoles($perfil['name'])) {
-                $perfisDoUsuario[$perfil['id']]['name'] = $perfil['name'];
-                $perfisDoUsuario[$perfil['id']]['description'] = $perfil['description'];
-            }
-         }
+        $perfis = Role::all();
+        $perms = Permission::all();
  
-        //  Exibe as permissões que o usuário possui
-         $todasAsPermissoes = Permission::all();
-
-         foreach($todasAsPermissoes as $permissao) {
-            if($usuario->hasAllPermissions($permissao['name'])) {
-                $permissoesDoUsuario[$permissao['id']]['name'] = $permissao['name'];
-                $permissoesDoUsuario[$permissao['id']]['description'] = $permissao['description'];
-            }
-         }
- 
-         return view('admin.usuarios.show', compact('usuario', 'perfisDoUsuario', 'permissoesDoUsuario'));
+         return view('admin.usuarios.show', compact('usuario', 'perfis', 'perms'));
     }
 
     /**

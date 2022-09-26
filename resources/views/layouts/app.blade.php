@@ -20,15 +20,16 @@
     </head>
     
     <body>
-        <div id="app">
 
-            @auth
-                <x-navegacao />
-            @endauth
-
-            <main class="py-4">
-                @yield('content')
-            </main>
+        <div class="pb-5">
+            @auth <x-navegacao /> @endauth
         </div>
+
+        <div class="container-fluid pt-5">
+            <div id="app">
+                @yield('content')
+            </div>
+        </div>
+
     </body>
 </html>

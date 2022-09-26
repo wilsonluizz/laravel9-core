@@ -14,13 +14,15 @@ class Usuario extends Component
     public $type;
     public $usuario;
     public $perfis;
+    public $perms;
 
 
-    public function __construct($type, $usuario = null, $perfis = null)
+    public function __construct($type = null, $usuario = null, $perfis = null, $perms = null)
     {
         
         /**
          * Tipo de formulário: Criar ou editar
+         * Se estiver em branco, é apenas visualização (Show)
          * @var string 'create' ou 'edit'
          */
         $this->type = $type;
@@ -31,6 +33,7 @@ class Usuario extends Component
          */
         $this->usuario = $usuario;
         $this->perfis = $perfis;
+        $this->perms = $perms;
 
     }
 

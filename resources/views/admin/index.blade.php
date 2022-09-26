@@ -3,7 +3,7 @@
 @section('content')
     <div class="row pb-2">
         <h3 class="text-danger">Administração do sistema</h3>
-        <p class="lead">
+        <p class="lead d-none d-sm-block">
             Utilize a barra lateral ou as opções abaixo para administrar a plataforma.
         </p>
     </div>

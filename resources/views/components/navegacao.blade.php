@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
-    <div class="container-fluid">
+    <div class="container-fluid col-md-10">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
@@ -37,24 +37,21 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link text-danger" href="{{ route('admin') }}">
+                                <span class="nav-label me-2 d-md-none">Sistema</span>
                                 <i class="bi bi-gear-fill fs-5"></i>
-                                <span class="nav-label ms-1 d-none">Admin</span>
                             </a>
                         </li>
                     </ul>
                     @endcan
 
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle ms-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <i class="bi-person-circle fs-5"></i>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <span>{{ Auth::user()->name }}</span>
+                            <i class="bi-person-circle fs-5 ms-2"></i>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdown">
                                 
-                            <span class="dropdown-item text-secondary disabled fw-light fst-italic">
-                                {{ Auth::user()->name }}
-                            </span>
-
                             <!-- Alterar as próprias informações -->
                             <a class="dropdown-item" href="{{ route('eu.edit', Auth::user()->id) }}">Minhas informações</a>
 
