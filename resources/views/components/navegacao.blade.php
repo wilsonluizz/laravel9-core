@@ -49,16 +49,17 @@
                             <span>{{ Auth::user()->name }}</span>
                             <i class="bi-person-circle fs-5 ms-2"></i>
                         </a>
-
+                        
                         <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdown">
                                 
                             <!-- Alterar as próprias informações -->
                             <a class="dropdown-item" href="{{ route('eu.edit', Auth::user()->id) }}">Minhas informações</a>
-
+                            
                             <hr class="dropdown-divider">
 
                             <!-- Fazer logout -->
                             <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="bi bi-power fs-5 me-2"></i>
                                 {{ __('Logout') }}
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

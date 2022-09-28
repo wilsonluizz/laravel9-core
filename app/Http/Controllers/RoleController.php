@@ -78,6 +78,7 @@ class RoleController extends Controller
         $usuarios = User::role($perfil)->get(['id', 'name', 'email']);
 
         // Exibir permissões desse perfil
+        // TODO: Corrigir código
         $todasAsPermissoes = Permission::get(['id', 'name', 'description']);
         foreach($todasAsPermissoes as $permissao) {
             $permissoesDoPerfil[$permissao['id']]['id'] = $permissao['id'];
