@@ -27,7 +27,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('localidades', function (Blueprint $table) {
-            //
+            $table->dropColumn('latidute');
+            $table->dropColumn('longitude');
         });
     }
 };

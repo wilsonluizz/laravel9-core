@@ -13,7 +13,7 @@ class LocalidadeController extends Controller
      */
     public function index()
     {
-        //
+        return view('localidades.index');
     }
 
     /**

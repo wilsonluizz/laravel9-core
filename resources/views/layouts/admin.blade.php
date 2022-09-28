@@ -34,7 +34,7 @@
             <x-navegacao />
         </div>
 
-        <div class="position-fixed vh-100 overflow-scroll">
+        <div class="position-fixed vh-100 overflow-auto">
             <x-navegacao_admin />
         </div>
         

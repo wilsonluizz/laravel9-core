@@ -33,6 +33,8 @@ use Illuminate\Support\Facades\Route;
 
     // CONTROLE DA PÁGINA INICIAL (HOME)
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::resource('centros-de-custo', 'App\Http\Controllers\CentroDeCustoController');
+    Route::resource('localidades', 'App\Http\Controllers\LocalidadeController');
 
 
 
@@ -74,3 +76,7 @@ use Illuminate\Support\Facades\Route;
 
         });
     });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

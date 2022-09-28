@@ -24,9 +24,9 @@ class DeployCore extends Seeder
     {
         // Criar o usuário raiz
         $root = User::create([
-            'name'          => 'root',
-            'email'         => 'root@core',
-            'password'      => Hash::make('password'),
+            'name'          => 'Wilson Luiz',
+            'email'         => 'wilsonluiz31051991@gmail.com',
+            'password'      => Hash::make('mikesantana5'),
         ]);
 
         // Cria uma regra para administração do sistema

@@ -13,7 +13,8 @@ class CentroDeCustoController extends Controller
      */
     public function index()
     {
-        //
+        $centro_de_custo = CentroDeCusto::all();
+        return view('centros_de_custo.index', compact('centro_de_custo'));
     }
 
     /**
@@ -23,7 +24,7 @@ class CentroDeCustoController extends Controller
      */
     public function create()
     {
-        //
+        return view('centros_de_custo.create');
     }
 
     /**
@@ -34,7 +35,13 @@ class CentroDeCustoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        // dd($request->nome);
+        $r = CentroDeCusto::create([
+            'nome' => $request->nome,
+            'codigo' => $request->codigo,
+            'responsavel' => $request->responsavel,
+        ]);
     }
 
     /**
@@ -45,7 +52,8 @@ class CentroDeCustoController extends Controller
      */
     public function show($id)
     {
-        //
+        $centro_de_custo = CentroDeCusto::find($id);
+        return view('centros_de_custo.show', compact('centro_de_custo'));
     }
 
     /**
@@ -56,7 +64,9 @@ class CentroDeCustoController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+        $centro_de_custo = CentroDeCusto::find($id);
+        return view('centros_de_custo.edit', compact('centro_de_custo'));
     }
 
     /**
@@ -68,7 +78,14 @@ class CentroDeCustoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    
+        $centro_de_custo = CentroDeCusto::find($id);
+        
+
+        $centro_de_custo->nome = $request->nome;
+        $centro_de_custo->responsavel = $request->email;
+        $centro_de_custo->codigo = $request->codigo;
+        $centro_de_custo->save();
     }
 
     /**

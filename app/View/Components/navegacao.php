@@ -13,7 +13,7 @@ class navegacao extends Component
      */
     public function __construct()
     {
-        $this->middleware(['auth']);
+        // $this->middleware(['auth']);
     }
 
     /**
