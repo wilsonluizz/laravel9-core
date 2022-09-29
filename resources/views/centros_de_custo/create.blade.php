@@ -21,7 +21,7 @@
                                     <input type="text" name="responsavel" class="form-control" placeholder="Responsavel">
                                 </div>
                                 <div class="row my-2">
-                                    <input type="text" name="codigo" class="form-control" placeholder="Codigo">
+                                    <input type="text   " name="codigo" class="form-control" placeholder="Codigo">
                                 </div>
                             </div>
 
