@@ -74,20 +74,15 @@ class RoleController extends Controller
         // Busca o perfil no Banco de dados
         $perfil = Role::find($id);
 
+        
+        $perms = Permission::all();
+
+        $usuarios = User::all();
+        // TODO: Posso usar a expressão abaixo e substituir o código de filtragem na view?
         // Buscar usuários que contém esse perfil;
-        $usuarios = User::role($perfil)->get(['id', 'name', 'email']);
-
-        // Exibir permissões desse perfil
-        // TODO: Corrigir código
-        $todasAsPermissoes = Permission::get(['id', 'name', 'description']);
-        foreach($todasAsPermissoes as $permissao) {
-            $permissoesDoPerfil[$permissao['id']]['id'] = $permissao['id'];
-            $permissoesDoPerfil[$permissao['id']]['name'] = $permissao['name'];
-            $permissoesDoPerfil[$permissao['id']]['description'] = $permissao['description'];
-            $permissoesDoPerfil[$permissao['id']]['hasPermission'] = ($perfil->hasAllPermissions($permissao['name']) ? true : false);
-        }
-
-        return view('admin.perfis.show', compact('perfil', 'usuarios', 'permissoesDoPerfil'));
+        // $usuarios = User::role($perfil)->get();
+        
+        return view('admin.perfis.show', compact('perfil', 'perms', 'usuarios'));
     }
 
     /**
@@ -112,9 +107,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
         $perfil = Role::find($id);

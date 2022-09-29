@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-         // Resgata o ID do usuário
+        // Resgata o ID do usuário
         $usuario = User::find($id);
 
         $perfis = Role::all();

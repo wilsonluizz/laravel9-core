@@ -90,11 +90,9 @@
                     <i class="fas fa-lock text-primary pr-2"></i>
                     <span class="badge bg-primary me-1">LGPD</span>
                     Informações criptografadas
-
                     {{-- 
                         FIXME: Incluir criptografia de dados
                     --}}
-
                 </p> 
             </div>
             
@@ -180,6 +178,7 @@
             
             
             <div class="col-12 col-sm-12 col-md-9 col-lg-9">
+
                 <div class="row table-responsive">
 
                     <table class="table table-hover">
@@ -216,7 +215,7 @@
                                     @if($usuario->hasAllRoles($p->name))
                                         <tr>
                                             <td>
-                                                <label><i class="bi bi-check me-2 fs-5 text-success"></i>{{ $p->name }}</label>
+                                                {{ $p->name }}
                                             </td>
                                             <td>
                                                 @if(!is_null($p->description))
@@ -233,15 +232,13 @@
 
                         </tbody>
                     </table>
-
                     
-
                 </div>
             </div>
         </div>
-    
     </div>
 
+    {{-- Pé do cartão --}}
     <div class="card-footer">
 
         <div class="row">

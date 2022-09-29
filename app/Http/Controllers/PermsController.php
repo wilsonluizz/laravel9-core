@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+// Permissões
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+
 class PermsController extends Controller
 {
     /**
@@ -13,7 +17,8 @@ class PermsController extends Controller
      */
     public function index()
     {
-        //
+        $perms = Permission::all();
+        return view('admin.perms.index', compact('perms'));
     }
 
     /**
@@ -23,7 +28,8 @@ class PermsController extends Controller
      */
     public function create()
     {
-        //
+        $perfis = Role::all();
+        return view('admin.perms.create', compact('perfis'));
     }
 
     /**
@@ -34,7 +40,33 @@ class PermsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // Apenas o nome da permissão é requerida. Perfis podem ser inclusas depois (através de Edit)
+         $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        // Cria a permissão
+        Permission::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+        ]);
+
+        // Verifica os perfis selecionados e vincula a permissão
+        if(!is_null($request->input('perfis'))) {
+            foreach($request->input('perfis') as $p) {
+                $perfil = Role::find($p);
+
+                $perfil->syncPermissions([
+                    $request->input('name'),
+                ]);
+            }
+        }
+
+        // Retorna para a tela inicial com mensagem de sucesso na criação do perfil
+        return redirect()->route('permissoes.index')->with([
+            'mensagem' => 'Perfil criado com sucesso!',
+            'estilo' => 'bg-success',
+        ]);
     }
 
     /**
@@ -45,7 +77,11 @@ class PermsController extends Controller
      */
     public function show($id)
     {
-        //
+        $permissao = Permission::find($id);
+        $perfis = Role::all();
+
+        // TODO: Usuários ?
+         return view('admin.perms.show', compact('permissao', 'perfis'));
     }
 
     /**
@@ -56,7 +92,9 @@ class PermsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $permissao = Permission::find($id);
+        $perfis = Role::all();
+        return view('admin.perms.edit', compact('permissao', 'perfis'));
     }
 
     /**
@@ -68,7 +106,29 @@ class PermsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $permissao = Permission::find($id);
+        $permissao->update($request->all());
+
+
+        // Verifica os perfis selecionados e vincula a permissão
+        if(!is_null($request->input('perfis'))) {
+            foreach($request->input('perfis') as $p) {
+                $perfil = Role::find($p);
+
+                $perfil->syncPermissions([
+                    $request->input('name'),
+                ]);
+            }
+        }
+
+        return redirect()->route('permissoes.index')->with([
+            'mensagem' => 'Perfil e permissões alterados com sucesso!', 
+            'estilo' => 'bg-primary'
+        ]);
     }
 
     /**

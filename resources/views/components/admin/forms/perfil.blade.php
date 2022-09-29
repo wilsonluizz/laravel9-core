@@ -1,7 +1,11 @@
-<form action="{{ ($type == 'edit') ? route('perfis.update', $perfil->id) : route('perfis.store') }}" method="post">
-
+{{-- Habilita o formulário apenas para $type CREATE e EDIT --}}
+@if(!is_null($type))
+    <form action="{{ ($type == 'edit') ? route('perfis.update', $perfil->id) : route('perfis.store') }}" method="post">
+    
     @csrf
     @if($type == 'edit') @method('PUT') @endif
+
+@endif
 
     {{-- Identificação do formulário --}}
     <div class="card-header pb-1">
@@ -11,36 +15,63 @@
                     <i class="bi bi-person-badge me-3"></i> 
                     <span class="text-secondary">Perfil |</span>
 
-                    @if($type == 'edit') 
-                        Editar {{ $perfil->name }} 
-                    @else 
-                        Criar 
+                    @if(!is_null($type))
+                        @if($type == 'edit') 
+                            Editar {{ $perfil->name }} 
+                        @else 
+                            Criar 
+                        @endif
+                    @else
+                        {{ $perfil->name }}
                     @endif
 
                 </h3>
             </div>
 
             <div class="col-2 text-end">
-            
-                {{-- Habilita exclusão caso tenha essa permissão --}}
-                @if($type == 'edit')
-                @can('admin')
-                <button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Apagar {{ $perfil->name }}" id="confirmarExclusao">
-                    {{-- 
-                        FIXME: Habilitar modal para exclusão
-                        FIXME: Formulário para exclusão
-                    --}}
 
-                    <span class="d-xs-block d-lg-none">
-                        <i class="bi bi-trash-fill"></i>
-                    </span>                    
-                    <span class="d-none d-lg-block">
-                        <i class="bi bi-trash-fill me-1"></i>
-                        Excluir perfil
-                    </span>
+                {{-- EDIT --}}
+                @if(!is_null($type))
 
-                </button>
-                @endcan
+                    {{-- Habilita exclusão caso tenha essa permissão --}}
+                    @if($type == 'edit')
+                        @can('admin')
+                            <button class="btn btn-danger" type="button" data-toggle="tooltip" title="Apagar {{ $perfil->name }}" id="confirmarExclusao" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="e.preventDefault();">
+                                {{-- 
+                                    FIXME: Habilitar modal para exclusão
+                                    FIXME: Formulário para exclusão
+                                --}}
+
+                                <span class="d-xs-block d-lg-none">
+                                    <i class="bi bi-trash-fill"></i>
+                                </span>                    
+                                <span class="d-none d-lg-block">
+                                    <i class="bi bi-trash-fill me-1"></i>
+                                    Excluir perfil
+                                </span>
+
+                            </button>
+                        @endcan
+                    @endif
+
+                {{-- SHOW --}}
+                @else
+                    @can('admin')
+
+                        <div class="d-xs-block d-lg-none">
+                            <a href="{{ route('perfis.edit', $perfil->id) }}" class="btn btn-secondary">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </div>
+
+                        <div class="d-none d-lg-block">
+                            <a href="{{ route('perfis.edit', $perfil->id) }}" class="btn btn-secondary">
+                                <i class="bi bi-pencil-square"></i>
+                                Editar perfil
+                            </a>
+                        </div>
+
+                    @endcan
                 @endif
 
             </div>
@@ -69,10 +100,20 @@
                         <label for="nomeDoPerfil" class="d-block fw-bold">
                             Nome do perfil
                         </label>
-                        <input type="text" name="name" class="form-control" id="nomeDoPerfil" aria-describedby="dicaPerfil" @if($type == 'edit') value="{{ $perfil->name }}" @endif />
-                        <small id="dicaPerfil" class="form-text text-muted"> 
-                            <strong>Obrigatório</strong>. Você pode utilizar o cargo como base para o perfil de usuários, por exemplo.
-                        </small>
+
+                        {{-- EDIT / CREATE || Campo de formulário Nome --}}
+                        @if(!is_null($type))
+
+                            <input type="text" name="name" class="form-control" id="nomeDoPerfil" aria-describedby="dicaPerfil" @if($type == 'edit') value="{{ $perfil->name }}" @endif />
+                            
+                            <small id="dicaPerfil" class="form-text text-muted"> 
+                                <strong>Obrigatório</strong>. Você pode utilizar o cargo como base para o perfil de usuários, por exemplo.
+                            </small>
+
+                        {{-- SHOW --}}
+                        @else
+                            {{ $perfil->name }}
+                        @endif
 
                     </div>
                 </div>
@@ -85,11 +126,28 @@
                             Descrição do perfil
                         </label>
                         
-                        <textarea rows="2" name="description" class="form-control" id="descricaoDoPerfil" aria-describedby="dicaDescricaoPerfil">@if($type == 'edit'){{$perfil->description}}@endif</textarea>
                         
-                        <small id="dicaDescricaoPerfil" class="form-text text-muted"> 
-                            <strong>Opcional</strong>. Você pode incluir uma descrição sobre esse perfil.
-                        </small>
+                        {{-- EDIT / CREATE || Campo de formulário Descrição --}}
+                        @if(!is_null($type))
+
+                            <textarea rows="2" name="description" class="form-control" id="descricaoDoPerfil" aria-describedby="dicaDescricaoPerfil">@if($type == 'edit'){{$perfil->description}}@endif</textarea>
+                            
+                            <small id="dicaDescricaoPerfil" class="form-text text-muted"> 
+                                <strong>Opcional</strong>. Você pode incluir uma descrição sobre esse perfil.
+                            </small>
+
+                        {{-- SHOW || Exibe descrição --}}
+                        @else
+
+                            @if(!is_null($perfil->description)) 
+                                {{ $perfil->description }} 
+                            @else 
+                                <p class="text-muted">    
+                                    Nenhuma descrição fornecida. 
+                                </p>
+                            @endif
+
+                        @endif
 
                     </div>
                 </div>
@@ -110,45 +168,117 @@
                 </p> 
             </div>
             
-            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 table-responsive">
-                
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th class="col-lg-4">Permissão para</small></th>
-                            <th class="col-lg-8">Descrição da permissão</small></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($perms as $p)
-                        <tr>
-                            <td>
-                                <div class="form-check form-switch">
-                                    @can('admin')
-                                    <input class="form-check-input" type="checkbox" role="switch" name="perms[]" value="{{ $p->id }}" id="{{ $p->id }}" @if($type == 'edit') {{ ($perfil->hasAllPermissions($p) ? 'checked="checked"' : "") }} @endif>
-                                    <label class="form-check-label d-block ms-2" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
-                                    @endcan
-                                    
-                                    @cannot('admin')
-                                        {{ $p->name }}
-                                    @endcan
-                                </div>
-                            </td>
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+                <div class="row table-responsive">
 
-                            <td>
-                                @if(!is_null($p->description))
-                                    {{ $p->description }}
-                                @else
-                                    <span class="text-secondary">Nenhuma descrição fornecida.</span>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-lg-4">Permissão para</small></th>
+                                <th class="col-lg-8">Descrição da permissão</small></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+    
+                            @if(!is_null($type))
+    
+                                @foreach($perms as $p)
+                                    <tr>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                @can('admin')
+                                                <input class="form-check-input" type="checkbox" role="switch" name="perms[]" value="{{ $p->id }}" id="{{ $p->id }}" @if($type == 'edit') {{ ($perfil->hasAllPermissions($p) ? 'checked="checked"' : "") }} @endif>
+                                                <label class="form-check-label d-block ms-2" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
+                                                @endcan
+                                                
+                                                @cannot('admin')
+                                                    {{ $p->name }}
+                                                @endcan
+                                            </div>
+                                        </td>
+    
+                                        <td>
+                                            @if(!is_null($p->description))
+                                                {{ $p->description }}
+                                            @else
+                                                <span class="text-secondary">Nenhuma descrição fornecida.</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+    
+                            {{-- SHOW --}}
+                            @else
+    
+                                @foreach($perms as $p)
+    
+                                    @if($p->hasAllRoles($perfil->name))
+                                        <tr>
+                                            <td>
+                                                {{ $p->name }}
+                                            </td>
+    
+                                            <td>
+                                                @if(!is_null($p->description))
+                                                    {{ $p->description }}
+                                                @else
+                                                    <span class="text-secondary">Nenhuma descrição fornecida.</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+    
+                                @endforeach
+    
+                            @endif
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
 
         </div>
+
+        @if(!is_null($usuarios))
+            <hr />
+
+            {{-- Usuários --}}
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-3">
+                    <h5>Usuários</h5>
+                    <p class="text-secondary">
+                        <span class="badge bg-danger me-1">Atenção</span>
+                        Usuários que possuem esse perfil e essas permissões
+                    </p> 
+                </div>
+                
+                <div class="col-xs-12 col-sm-12 col-md-9">
+                    
+                    <div class="row table-responsive">
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="col-lg-6">Nome</small></th>
+                                    <th class="col-lg-6">E-mail</small></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($usuarios as $u)
+                                <tr>
+                                    <td>{{ $u->name }}</td>
+                                    <td>{{ $u->email }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        @endif
+
     </div>
 
     {{-- Pé do cartão --}}
@@ -177,4 +307,32 @@
 
     </div>
 
-</form>
+@if(!is_null($type))
+    </form>
+@endif
+
+    {{-- 
+        FIXME: Apenas para teste de modal. Utilizar como component
+        <button type="button" class="btn btn-primary">
+            Launch demo modal
+        </button>
+        --}}
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          {{-- Você quer mesmo excluir {{ $perfil->name }}: --}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
