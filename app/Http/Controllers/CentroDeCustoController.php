@@ -13,7 +13,7 @@ class CentroDeCustoController extends Controller
      */
     public function index()
     {
-        $centro_de_custo = CentroDeCusto::all();
+        $centro_de_custo = CentroDeCusto::orderBy('id', 'desc')->get();
         return view('centros_de_custo.index', compact('centro_de_custo'));
     }
 
@@ -40,8 +40,9 @@ class CentroDeCustoController extends Controller
         $r = CentroDeCusto::create([
             'nome' => $request->nome,
             'codigo' => $request->codigo,
-            'responsavel' => $request->responsavel,
+            'responsavel' => $request->responsavel
         ]);
+        return redirect()->route('centros-de-custo.index');
     }
 
     /**
@@ -83,9 +84,10 @@ class CentroDeCustoController extends Controller
         
 
         $centro_de_custo->nome = $request->nome;
-        $centro_de_custo->responsavel = $request->email;
+        $centro_de_custo->responsavel = $request->responsavel;
         $centro_de_custo->codigo = $request->codigo;
         $centro_de_custo->save();
+        return redirect()->route('centros-de-custo.index');
     }
 
     /**
@@ -96,6 +98,7 @@ class CentroDeCustoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        CentroDeCusto::find($id)->delete();
+        return redirect()->route('centros-de-custo.index'); 
     }
 }

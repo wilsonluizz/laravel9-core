@@ -2,47 +2,38 @@
 
 
 @section('content')
-    {{-- <form action="{{ route('centros-de-custo.update', $centro_de_custo->id) }}" method="POST">
-    @csrf
-@method('put')
-    <label for="nome">Nome:</label><input type="text" name="nome" value="{{ $centro_de_custo->nome }}">
-    <label for="codigo">Codigo:</label><input type="text" name="codigo" value="{{ $centro_de_custo->codigo }}">
-    <label for="email">E-mail:</label><input type="text" name="email" value="{{ $centro_de_custo->responsavel}}">
-    <button type="submit">Enviar</button>
-   
-</form> --}}
-
     <div class="container">
+
         <div class="row">
             <div class="col-8">
                 <div class="card position-absolute top-50 start-50 translate-middle">
                     <div class="card-header pb-1">
                         <div>
-                            <h3 class="pt-1"><i class="bi bi-pencil"></i> Editar centro de custo</h3>
+                            <h3 class="pt-1"><i class="bi bi-pencil"></i> Editar Localidade</h3>
                         </div>
                     </div>
                     <div class="card-body table-responsive">
-                        <form action="{{ route('centros-de-custo.update', $centro_de_custo->id) }}" id="editar" method="POST">
+                        <form action="{{ route('localidades.update', $local->id) }}" id="editar" method="POST">
                             @csrf
                             @method('put')
                             <div class="form-row my-2">
                                 <div class="row my-2">
                                     <input type="text" maxlength="50" name="nome" class="form-control"
-                                        value="{{ $centro_de_custo->nome }}"">
+                                        value="{{ $local->nome }}"">
                                 </div>
                                 <div class="row my-2">
-                                    <input type="text" maxlength="50" name="responsavel" class="form-control"
-                                        value="{{ $centro_de_custo->responsavel }}">
+                                    <input type="text" maxlength="50" name="cidade" class="form-control"
+                                        value="{{ $local->cidade }}">
                                 </div>
                                 <div class="row my-2">
-                                    <input type="text   " name="codigo" class="form-control"
-                                        value="{{ $centro_de_custo->codigo }}">
+                                    <input type="text" maxlength="2" name="uf" class="form-control"
+                                        value="{{ $local->uf }}">
                                 </div>
                             </div>
 
                         </form>
 
-                        <form action="{{ route('centros-de-custo.destroy', $centro_de_custo->id) }} " id="apagar" method="POST">
+                        <form action="{{ route('localidades.destroy', $local->id) }} " id="apagar" method="POST">
                             @csrf
                             @method('DELETE')
                         </form>

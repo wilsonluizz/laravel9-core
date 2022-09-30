@@ -15,18 +15,20 @@
                             @csrf
                             <div class="form-row my-2">
                                 <div class="row my-2">
-                                    <input type="text" name="nome" class="form-control" placeholder="Nome">
+                                    <input type="text" maxlength="50" name="nome" class="form-control" placeholder="Nome">
                                 </div>
                                 <div class="row my-2">
-                                    <input type="text" name="responsavel" class="form-control" placeholder="Responsavel">
+                                    <input type="text" maxlength="50" name="responsavel" class="form-control" placeholder="Responsavel">
                                 </div>
                                 <div class="row my-2">
                                     <input type="text   " name="codigo" class="form-control" placeholder="Codigo">
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary mt-3">Criar</button>
-                            <a class="btn btn-sm btn-danger mt-3" href="{{ route('centros-de-custo.index') }}">Desistir</a>
+                            <button type="submit" class="btn btn-primary mt-3"><i class="bi bi-check"></i></button>
+                            
+                            <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i class="bi bi-back"></i></button>
+                            
                         </form>
                     </div>
                 </div>

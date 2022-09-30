@@ -13,7 +13,8 @@ class LocalidadeController extends Controller
      */
     public function index()
     {
-        return view('localidades.index');
+        $localidades = Localidade::orderBy('id', 'desc')->get();
+        return view('localidades.index', compact('localidades'));
     }
 
     /**
@@ -23,7 +24,7 @@ class LocalidadeController extends Controller
      */
     public function create()
     {
-        //
+        return view('localidades.create');
     }
 
     /**
@@ -34,7 +35,13 @@ class LocalidadeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $r = Localidade::create([
+            'nome' => ucwords($request->nome),
+            'cidade' => ucwords($request->cidade),
+            'uf' => strtoupper($request->uf)
+        ]);
+
+        return redirect()->route('localidades.index');
     }
 
     /**
@@ -45,7 +52,8 @@ class LocalidadeController extends Controller
      */
     public function show($id)
     {
-        //
+        $local = Localidade::find($id);
+        return view('localidades.show', compact('local'));
     }
 
     /**
@@ -56,7 +64,8 @@ class LocalidadeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $local = Localidade::find($id);
+        return view('localidades.edit', compact('local'));
     }
 
     /**
@@ -68,7 +77,14 @@ class LocalidadeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $local = Localidade::find($id);
+        
+        $local->nome = $request->nome;
+        $local->cidade = $request->cidade;
+        $local->uf = $request->uf;
+        $local->save();
+        return redirect()->route('localidades.index');
     }
 
     /**
@@ -79,6 +95,7 @@ class LocalidadeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Localidade::find($id)->delete();
+        return redirect()->route('localidades.index'); 
     }
 }
