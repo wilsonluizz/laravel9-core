@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <div class="row pb-2">
@@ -8,7 +8,7 @@
         </p>
     </div>
     
-    <div class="row row-cols-1 row-cols-md-2 g-4 pb-3">
+    <div class="row row-cols-1 @can('dev') row-cols-md-3 @else row-cols-md-2  @endcan }} g-3 pb-3">
         
         {{-- Card usuários --}}
         <div class="col">
@@ -37,7 +37,7 @@
 
                         <hr />
                         
-                        <li class="py-1"><a href="#" class="text-primary">Ajuda: O que é um perfil? Quando devo criar um?</a> <span class="badge bg-warning text-dark">Em breve</span></li>
+                        <li class="py-1"><a href="#" class="text-primary">Ajuda: O que é um perfil?</a> <span class="badge bg-warning text-dark">Em breve</span></li>
                         <li class="py-1"><a href="#" class="text-primary">Ajuda: Como funcionam as permissões?</a> <span class="badge bg-warning text-dark">Em breve</span></li>
                     </ul>
                 </div>

@@ -56,8 +56,8 @@ class UserController extends Controller
         $usuario = User::create($input);
         $usuario->assignRole($request->input('perfis'));
         return redirect()->route('usuarios.index')->with([
-            'mensagem' => 'Usuário criado com sucesso!', 
-            'estilo' => 'bg-success',
+            'message' => 'Usuário criado com sucesso!', 
+            'style' => 'success',
         ]);
     }
 
@@ -121,8 +121,8 @@ class UserController extends Controller
         $usuario->syncRoles($request->input('perfis'));
         
         return redirect()->route('usuarios.index')->with([
-            'mensagem' => 'Dados do usuário alterados com sucesso!', 
-            'estilo' => 'bg-primary',
+            'message' => 'Dados do usuário alterados com sucesso!', 
+            'style' => 'primary',
         ]);
     }
 
@@ -136,8 +136,8 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('usuarios.index')->with([
-            'mensagem' => 'Usuário apagado com sucesso!', 
-            'estilo' => 'bg-danger',
+            'message' => 'Usuário apagado com sucesso!', 
+            'style' => 'danger',
         ]);
     }
 }

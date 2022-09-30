@@ -58,8 +58,8 @@ class RoleController extends Controller
 
         // Retorna para a tela inicial com mensagem de sucesso na criação do perfil
         return redirect()->route('perfis.index')->with([
-            'mensagem' => 'Perfil criado com sucesso!',
-            'estilo' => 'bg-success',
+            'message' => 'Perfil criado com sucesso!',
+            'style' => 'bg-success',
         ]);
     }
 
@@ -115,8 +115,8 @@ class RoleController extends Controller
         $perfil->update($request->all());
         $perfil->syncPermissions($request->input('perms'));
         return redirect()->route('perfis.index')->with([
-            'mensagem' => 'Perfil e permissões alterados com sucesso!', 
-            'estilo' => 'bg-primary'
+            'message' => 'Perfil e permissões alterados com sucesso!', 
+            'style' => 'bg-primary'
         ]);
     }
 
@@ -130,8 +130,8 @@ class RoleController extends Controller
     {
         Role::find($id)->delete();
         return redirect()->route('perfis.index')->with([
-            'mensagem' => 'Perfil apagado com sucesso!',
-            'estilo' => 'bg-danger',
+            'message' => 'Perfil apagado com sucesso!',
+            'style' => 'bg-danger',
         ]);
     }
 }

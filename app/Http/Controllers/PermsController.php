@@ -64,8 +64,8 @@ class PermsController extends Controller
 
         // Retorna para a tela inicial com mensagem de sucesso na criação do perfil
         return redirect()->route('permissoes.index')->with([
-            'mensagem' => 'Perfil criado com sucesso!',
-            'estilo' => 'bg-success',
+            'message' => 'Perfil criado com sucesso!',
+            'style' => 'bg-success',
         ]);
     }
 
@@ -126,8 +126,8 @@ class PermsController extends Controller
         }
 
         return redirect()->route('permissoes.index')->with([
-            'mensagem' => 'Perfil e permissões alterados com sucesso!', 
-            'estilo' => 'bg-primary'
+            'message' => 'Perfil e permissões alterados com sucesso!', 
+            'style' => 'bg-primary'
         ]);
     }
 
