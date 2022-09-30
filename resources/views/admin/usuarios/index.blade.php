@@ -31,8 +31,8 @@
                                 <th class="col-3">Nome</th>
                                 <th class="col-3">E-mail</th>
                                 <th class="col-3">Perfis de usuário</th>
-                                <th class="col-1">Criado em</th>
-                                <th class="col-2 text-center">Ações</th>
+                                <th class="col-2 text-center">Criado em</th>
+                                <th class="col-1 text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,17 +50,17 @@
                                         @endforeach
                                     @endif
                                 </td>
-                                <td>{{ date('d/m/Y', strtotime($u->created_at)) }}</td>
+                                <td class="text-center">{{ date('d/m/Y', strtotime($u->created_at)) }}</td>
                                 <td class="text-center">
                                     
                                     @can('admin')
 
-                                        <a class="btn btn-sm btn-primary" href="{{ route('usuarios.show', $u->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $u->name }}">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-
                                         <a class="btn btn-sm btn-secondary" href="{{ route('usuarios.edit', $u->id) }}" data-toggle="tooltip" title="Editar {{ $u->name }}">
                                             <i class="bi bi-pencil-fill"></i>
+                                        </a>
+
+                                        <a class="btn btn-sm btn-danger" href="{{ route('usuarios.show', $u->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $u->name }}">
+                                            <i class="bi bi-trash-fill"></i>
                                         </a>
 
                                     @else
@@ -70,6 +70,7 @@
                                         </a>
 
                                     @endcan
+
                                 </td>
                             </tr>
                             @endforeach

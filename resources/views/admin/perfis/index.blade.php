@@ -30,8 +30,8 @@
                             <tr>
                                 <th class="col-3">Perfil</th>
                                 <th class="col-6">Descrição</th>
-                                <th class="col-1">Criado em</th>
-                                <th class="col-2 text-center">Ações</th>
+                                <th class="col-2 text-center">Criado em</th>
+                                <th class="col-1 text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,17 +45,17 @@
                                         <span class="text-muted">Nenhuma descrição informada.</span>
                                      @endif
                                 </td>
-                                <td>{{ date('d/m/Y', strtotime($p->created_at)) }}</td>
+                                <td class="text-center">{{ date('d/m/Y', strtotime($p->created_at)) }}</td>
                                 <td class="text-center">
 
                                     @can('admin')
-
-                                        <a class="btn btn-sm btn-primary" href="{{ route('perfis.show', $p->id) }}" data-toggle="tooltip" title="Detalhes do perfil {{ $p->name }}">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        
+                                    
                                         <a class="btn btn-sm btn-secondary" href="{{ route('perfis.edit', $p->id) }}" data-toggle="tooltip" title="Detalhes do perfil {{ $p->name }}">
                                             <i class="bi bi-pencil-fill"></i>
+                                        </a>
+
+                                        <a class="btn btn-sm btn-danger" href="{{ route('perfis.show', $p->id) }}" data-toggle="tooltip" title="Detalhes do perfil {{ $p->name }}">
+                                            <i class="bi bi-trash-fill"></i>
                                         </a>
                                     
                                     @else
