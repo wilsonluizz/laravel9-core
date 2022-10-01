@@ -56,7 +56,7 @@ class PermsController extends Controller
             foreach($request->input('perfis') as $p) {
                 $perfil = Role::find($p);
 
-                $perfil->syncPermissions([
+                $perfil->givePermissionTo([
                     $request->input('name'),
                 ]);
             }
@@ -64,8 +64,8 @@ class PermsController extends Controller
 
         // Retorna para a tela inicial com mensagem de sucesso na criação do perfil
         return redirect()->route('permissoes.index')->with([
-            'message' => 'Perfil criado com sucesso!',
-            'style' => 'bg-success',
+            'message' => 'Permissão criada com sucesso!',
+            'style' => 'primary',
         ]);
     }
 
@@ -126,8 +126,8 @@ class PermsController extends Controller
         }
 
         return redirect()->route('permissoes.index')->with([
-            'message' => 'Perfil e permissões alterados com sucesso!', 
-            'style' => 'bg-primary'
+            'message' => 'Perfis e permissões alterados com sucesso!', 
+            'style' => 'primary'
         ]);
     }
 
@@ -139,6 +139,10 @@ class PermsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Permission::find($id)->delete();
+        return redirect()->route('permissoes.index')->with([
+            'message' => 'Permissão excluída com sucesso!',
+            'style' => 'danger',
+        ]);
     }
 }

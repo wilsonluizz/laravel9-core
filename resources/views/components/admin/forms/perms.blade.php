@@ -1,8 +1,8 @@
 {{-- Habilita o formulário apenas para $type CREATE e EDIT --}}
 @if(!is_null($type))
     <form action="{{ ($type == 'edit') ? route('permissoes.update', $permissao->id) : route('permissoes.store') }}" method="post">
-    
     @csrf
+
     @if($type == 'edit') @method('PUT') @endif
 
 @endif
@@ -33,15 +33,13 @@
                 {{-- EDIT --}}
                 @if(!is_null($type))
 
-                    {{-- Habilita exclusão caso tenha essa permissão --}}
-                    @if($type == 'edit')
+                    {{-- 
+                        EDIT | Habilita exclusão caso tenha essa permissão.
+                        Não permite excluir as permissões 'admin' e 'dev'
+                    --}}
+                    @if(($type == 'edit') && $permissao->id > 2)
                         @can('admin')
-                            <button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Apagar {{ $permissao->name }}" id="confirmarExclusao">
-                                {{-- 
-                                    FIXME: Habilitar modal para exclusão
-                                    FIXME: Formulário para exclusão
-                                --}}
-
+                            <a class="btn btn-danger" type="button" data-toggle="tooltip" title="Apagar {{ $permissao->name }}" data-bs-toggle="modal" data-bs-target="#confirmarExclusao">
                                 <span class="d-xs-block d-lg-none">
                                     <i class="bi bi-trash-fill"></i>
                                 </span>                    
@@ -49,8 +47,10 @@
                                     <i class="bi bi-trash-fill me-1"></i>
                                     Excluir permissão
                                 </span>
+                            </a>
 
-                            </button>
+                            <x-modal.confirmar-exclusao o="permissoes" :n="$permissao->name" :id="$permissao->id" />
+
                         @endcan
                     @endif
 
@@ -116,7 +116,7 @@
                         {{-- EDIT / CREATE || Campo de formulário Nome --}}
                         @if(!is_null($type))
 
-                            <input type="text" name="name" class="form-control" id="nomeDoPerfil" aria-describedby="dicaPermissao" @if($type == 'edit') value="{{ $permissao->name }}" @endif />
+                            <input type="text" name="name" class="form-control" id="nomeDoPerfil" aria-describedby="dicaPermissao" @if($type == 'edit') value="{{ $permissao->name }}" @if($permissao->id <= 2) disabled="disabled" @endif @endif />
                             
                             @if($type == 'create')
                             <small id="dicaPermissao" class="form-text text-muted">
@@ -202,7 +202,10 @@
                                         <div class="form-check form-switch">
                                             @can('admin')
                                             
-                                            <input class="form-check-input" type="checkbox" role="switch" name="perfis[]" value="{{ $p->id }}" id="{{ $p->id }}" @if($type == 'edit') {{ ($permissao->hasAllRoles($p) ? 'checked="checked"' : "") }} @else @if($p->id <= 2) {{ 'checked="checked"' }} @endif @endif>
+                                            <input class="form-check-input" type="checkbox" role="switch" name="perfis[]" value="{{ $p->id }}" id="{{ $p->id }}" 
+                                            @if($type == 'edit') {{ ($permissao->hasAllRoles($p) ? 'checked="checked"' : "") }} 
+                                            @else @if($p->id <= 2) {{ 'checked="checked"' }} @endif @endif
+                                            @if(($permissao->id == 1) && ($p->id ==1)) disabled="disabled" @endif>
                                             <label class="form-check-label d-block ms-2" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
                                             
                                             @else

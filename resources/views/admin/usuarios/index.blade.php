@@ -59,9 +59,10 @@
                                             <i class="bi bi-pencil-fill"></i>
                                         </a>
 
-                                        <a class="btn btn-sm btn-danger" href="{{ route('usuarios.show', $u->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $u->name }}">
+                                        {{-- DELETE --}}
+                                        {{-- <a class="btn btn-sm btn-danger" href="{{ route('usuarios.show', $u->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $u->name }}">
                                             <i class="bi bi-trash-fill"></i>
-                                        </a>
+                                        </a> --}}
 
                                     @else
 

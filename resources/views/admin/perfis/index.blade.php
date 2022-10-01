@@ -50,17 +50,18 @@
 
                                     @can('admin')
                                     
-                                        <a class="btn btn-sm btn-secondary" href="{{ route('perfis.edit', $p->id) }}" data-toggle="tooltip" title="Detalhes do perfil {{ $p->name }}">
+                                        <a class="btn btn-sm btn-secondary" href="{{ route('perfis.edit', $p->id) }}" data-toggle="tooltip" title="Editar {{ $p->name }}">
                                             <i class="bi bi-pencil-fill"></i>
                                         </a>
 
+                                        {{-- DELETE --}}
                                         <a class="btn btn-sm btn-danger" href="{{ route('perfis.show', $p->id) }}" data-toggle="tooltip" title="Detalhes do perfil {{ $p->name }}">
                                             <i class="bi bi-trash-fill"></i>
                                         </a>
                                     
                                     @else
                                     
-                                        <a class="btn btn-sm btn-primary" href="{{ route('perfis.show', $p->id) }}" data-toggle="tooltip" title="Detalhes do perfil {{ $p->name }}">
+                                        <a class="btn btn-sm btn-primary" href="{{ route('perfis.show', $p->id) }}" data-toggle="tooltip" title="Detalhes de {{ $p->name }}">
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
 

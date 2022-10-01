@@ -1,8 +1,8 @@
 {{-- Habilita o formulário apenas para $type CREATE e EDIT --}}
 @if(!is_null($type))
     <form action="{{ ($type == 'edit') ? route('perfis.update', $perfil->id) : route('perfis.store') }}" method="post">
-    
     @csrf
+
     @if($type == 'edit') @method('PUT') @endif
 
 @endif
@@ -33,15 +33,13 @@
                 {{-- EDIT --}}
                 @if(!is_null($type))
 
-                    {{-- Habilita exclusão caso tenha essa permissão --}}
-                    @if($type == 'edit')
+                    {{-- 
+                        EDIT | Habilita exclusão caso tenha essa permissão.
+                        Não permite excluir os perfis 'Administrador' e 'Desenvolvedor(a)'
+                    --}}
+                    @if(($type == 'edit') && $perfil->id > 2)
                         @can('admin')
-                            <button class="btn btn-danger" type="button" data-toggle="tooltip" title="Apagar {{ $perfil->name }}" id="confirmarExclusao" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="e.preventDefault();">
-                                {{-- 
-                                    FIXME: Habilitar modal para exclusão
-                                    FIXME: Formulário para exclusão
-                                --}}
-
+                            <a class="btn btn-danger" type="button" data-toggle="tooltip" title="Apagar {{ $perfil->name }}" data-bs-toggle="modal" data-bs-target="#confirmarExclusao">
                                 <span class="d-xs-block d-lg-none">
                                     <i class="bi bi-trash-fill"></i>
                                 </span>                    
@@ -49,8 +47,10 @@
                                     <i class="bi bi-trash-fill me-1"></i>
                                     Excluir perfil
                                 </span>
+                            </a>
 
-                            </button>
+                            <x-modal.confirmar-exclusao o="perfis" :n="$perfil->name" :id="$perfil->id" />
+
                         @endcan
                     @endif
 
@@ -187,7 +187,9 @@
                                         <td>
                                             <div class="form-check form-switch">
                                                 @can('admin')
-                                                <input class="form-check-input" type="checkbox" role="switch" name="perms[]" value="{{ $p->id }}" id="{{ $p->id }}" @if($type == 'edit') {{ ($perfil->hasAllPermissions($p) ? 'checked="checked"' : "") }} @endif>
+                                                <input class="form-check-input" type="checkbox" role="switch" name="perms[]" value="{{ $p->id }}" id="{{ $p->id }}" 
+                                                @if($type == 'edit') {{ ($perfil->hasAllPermissions($p) ? 'checked="checked"' : "") }} @endif
+                                                @if(($perfil->id == 1) && ($p->id == 1)) disabled="disabled" @endif>
                                                 <label class="form-check-label d-block ms-2" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
                                                 @endcan
                                                 
@@ -310,29 +312,3 @@
 @if(!is_null($type))
     </form>
 @endif
-
-    {{-- 
-        FIXME: Apenas para teste de modal. Utilizar como component
-        <button type="button" class="btn btn-primary">
-            Launch demo modal
-        </button>
-        --}}
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          {{-- Você quer mesmo excluir {{ $perfil->name }}: --}}
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>

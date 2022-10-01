@@ -1,8 +1,8 @@
 {{-- Habilita o formulário apenas para $type CREATE e EDIT --}}
 @if(!is_null($type))
     <form action="{{ ($type == 'edit') ? route('usuarios.update', $usuario->id) : route('usuarios.store') }}" method="post">
-
     @csrf
+
     @if($type == 'edit') @method('PUT') @endif
 
 @endif
@@ -31,27 +31,24 @@
                 
                 @if(!is_null($type))
                 
-                    {{-- EDIT || Habilita exclusão caso tenha essa permissão --}}
-                    @if($type == "edit")
+                    {{-- 
+                        EDIT | Habilita exclusão caso tenha essa permissão.
+                        Não permite excluir as permissões 'admin' e 'dev'
+                    --}}
+                    @if(($type == "edit") && ($usuario->id > 1))
                         @can('admin')
-                            <button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Apagar {{ $usuario->name }}" id="confirmarExclusao">
-                                {{-- 
-                                    FIXME: Habilitar modal para exclusão
-                                    FIXME: Formulário para exclusão
-                                --}}
-                                
-                                {{-- Botão para telas pequenas --}}
+                            <a class="btn btn-danger" type="button" data-toggle="tooltip" title="Apagar {{ $usuario->name }}" data-bs-toggle="modal" data-bs-target="#confirmarExclusao">
                                 <span class="d-xs-block d-lg-none">
                                     <i class="bi bi-trash-fill"></i>
-                                </span>    
-                                
-                                {{-- Botão para telas grandes --}}
+                                </span>                    
                                 <span class="d-none d-lg-block">
                                     <i class="bi bi-trash-fill me-1"></i>
                                     Excluir usuário
-                                </span>        
+                                </span>
+                            </a>
 
-                            </button>
+                            <x-modal.confirmar-exclusao o="usuarios" :n="$usuario->name" :id="$usuario->id" />
+
                         @endcan
                     @endif
 
@@ -112,7 +109,6 @@
                             <input type="text" name="name" class="form-control" id="nome" aria-describedby="dicaNome" @if($type == 'edit') value="{{ $usuario->name }}" @endif />
                             <small id="dicaNome" class="form-text text-muted"><strong>Obrigatório</strong>. Utilize o nome completo, sem abreviaturas</small>
 
-
                         {{-- SHOW || Exibe Nome --}}
                         @else
                             {{ $usuario->name }}
@@ -145,12 +141,19 @@
                             Senha
                         </label>
 
-                        @if(!is_null($type))
-                            <input type="password" name="password" class="form-control" id="password" aria-describedby="dicaPassword" @if($type == 'edit') disabled="disabled" @endif />
-                            @if($type == 'edit') 
-                                <small id="dicaPassword" class="form-text text-muted"><strong>Desabilitado</strong>. Você não pode trocar a senha de outro usuário</small>
-                            @else
+                        @if((!is_null($type)))
+                            @if($type == 'create') 
+                                <input type="password" name="password" class="form-control" id="password" aria-describedby="dicaPassword" />
                                 <small id="dicaPassword" class="form-text text-muted"><strong>Obrigatório</strong>. Utilize uma senha forte - use letras maiúsculas, minúsculas e caracteres especiais (#, @, $, ...)</small>
+                            
+                            {{-- EDIT | Permite mudar apenas a própria senha --}}
+                            @else
+                                @if($usuario->id === Auth::user()->id)
+                                    <input type="password" name="password" class="form-control" id="password" aria-describedby="dicaPassword" />
+                                    <small id="dicaPassword" class="form-text text-muted"><strong>Obrigatório</strong>. Utilize uma senha forte - use letras maiúsculas, minúsculas e caracteres especiais (#, @, $, ...)</small>
+                                @else
+                                    <small class="text-muted">***********</small>
+                                @endif
                             @endif
                         @else
                             <small class="text-muted">***********</small>
@@ -195,7 +198,9 @@
                                 <tr>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" name="perfis[]" value="{{ $p->id }}" id="{{ $p->id }}" @if($type == 'edit') {{ ($usuario->hasRole($p) ? 'checked="checked"' : "") }} @endif>
+                                            <input class="form-check-input" type="checkbox" role="switch" name="perfis[]" value="{{ $p->id }}" id="{{ $p->id }}" 
+                                            @if($type == 'edit') {{ ($usuario->hasRole($p) ? 'checked="checked"' : "") }} @endif 
+                                            @if(($usuario->id == 1) && ($p->id == 1)) disabled="disabled" @endif>
                                             <label class="form-check-label d-block pe-auto ms-3" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
                                         </div>
                                     </td>

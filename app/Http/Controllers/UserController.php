@@ -57,7 +57,7 @@ class UserController extends Controller
         $usuario->assignRole($request->input('perfis'));
         return redirect()->route('usuarios.index')->with([
             'message' => 'Usuário criado com sucesso!', 
-            'style' => 'success',
+            'style' => 'primary',
         ]);
     }
 
@@ -136,7 +136,7 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('usuarios.index')->with([
-            'message' => 'Usuário apagado com sucesso!', 
+            'message' => 'Usuário excluído com sucesso!', 
             'style' => 'danger',
         ]);
     }
