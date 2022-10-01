@@ -9,7 +9,7 @@
 
     <div class="card-header pb-1">
         <div class="row">
-            <div class="col-10">
+            <div class="col-8">
                 <h3 class="pt-1">
                     <i class="bi bi-person-fill me-3"></i> 
                     <span class="text-secondary">Usuário |</span>
@@ -27,7 +27,7 @@
                 </h3>
             </div>
 
-            <div class="col-2 text-end">
+            <div class="col-4 text-end">
                 
                 @if(!is_null($type))
                 
@@ -84,7 +84,6 @@
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                 <h5>Informações pessoais</h5>
                 <p class="text-secondary">
-                    <i class="fas fa-lock text-primary pr-2"></i>
                     <span class="badge bg-primary me-1">LGPD</span>
                     Informações criptografadas
                     {{-- 
@@ -172,7 +171,6 @@
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                 <h5>Perfis</h5>
                 <p class="text-secondary">
-                    <i class="fas fa-lock text-primary pr-2"></i>
                     <span class="badge bg-danger me-1">Atenção</span>
                     Os <strong>perfis</strong> contém um grupo de permissões que
                     definem o que o usuário poderá executar na plataforma
@@ -199,8 +197,11 @@
                                     <td>
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" role="switch" name="perfis[]" value="{{ $p->id }}" id="{{ $p->id }}" 
-                                            @if($type == 'edit') {{ ($usuario->hasRole($p) ? 'checked="checked"' : "") }} @endif 
-                                            @if(($usuario->id == 1) && ($p->id == 1)) disabled="disabled" @endif>
+                                                @if($type == 'edit') {{ ($usuario->hasRole($p) ? 'checked="checked"' : "") }} 
+                                                    @if(($usuario->id == 1) && ($p->id == 1)) disabled="disabled" @endif
+                                                @endif
+                                            >
+                                            
                                             <label class="form-check-label d-block pe-auto ms-3" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
                                         </div>
                                     </td>
@@ -248,21 +249,21 @@
 
         <div class="row">
 
-            <div class="col-10 mt-2">
+            <div class="col-8 mt-2">
                 <a class="text-muted text-decoration-none" href="{{ route('usuarios.index') }}">
                     <i class="bi bi-arrow-return-left"></i>
                     <span class="ms-2">Voltar @if(!is_null($type)) sem {{ ($type == 'create' ? 'criar usuário' : 'editar informações')  }} @else à página anterior @endif</span>
                 </a>
             </div>
 
-            <div class="col-2 text-end">
+            <div class="col-4 text-end">
                 @if(!is_null($type))
                     <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="{{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário">
                         <span class="d-xs-block d-lg-none">
                             <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }}"></i>
                         </span>                    
                         <span class="d-none d-lg-block">
-                            <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }}"></i>
+                            <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} me-1"></i>
                             {{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário
                         </span>                   
                     </button>

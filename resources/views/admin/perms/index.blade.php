@@ -7,10 +7,10 @@
 
                 <div class="card-header pb-1">
                     <div class="row">
-                        <div class="col-10">
+                        <div class="col-8">
                             <h3 class="pt-1"><i class="bi bi-toggles me-3"></i> Permissões</h3>
                         </div>
-                        <div class="col-2 text-end">
+                        <div class="col-4 text-end">
                             <a class="btn btn-primary" href="{{ route('permissoes.create') }}" data-toggle="tooltip" title="Criar uma permissão">
                                 <span class="d-lg-none">
                                     <i class="bi bi-plus-lg"></i>
@@ -71,14 +71,14 @@
                 </div>
                 <div class="card-footer">
                     <div class="row">
-                        <div class="col-10 mt-1">
+                        <div class="col-8 mt-1">
                             <a class="text-muted pt-2 text-decoration-none" href="{{ route('admin') }}">
                                 <i class="bi bi-arrow-return-left"></i>
                                 <span class="ms-2">Voltar à página anterior</span>
                             </a>
                         </div>
     
-                        <div class="col-2 text-end"></div>
+                        <div class="col-4 text-end"></div>
                     </div>
                 </div>
             </div>

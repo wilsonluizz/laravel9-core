@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,42 +36,39 @@ use Illuminate\Support\Facades\Route;
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-
-// Rotas de administração
+// As rotas dentro desse grupo precisam ter passado por autenticação
 // Todas precisam ser autenticadas (Middleware: auth)
-
+Route::group(['middleware' => ['auth']], function() {
+            
+    // Rota de gerenciamento dos próprios dados
+    Route::resource('self', 'App\Http\Controllers\SelfController');
+    
+    // Rotas de administração
     // Todas as rotas abaixo possuem o 'prefixo' /admin/
     Route::prefix('admin')->group(function() {
-
-        // As rotas dentro desse grupo precisam ter passado por autenticação
-        Route::group(['middleware' => ['auth']], function() {
-            
-            // Rota de gerenciamento dos próprios dados
-            // TODO: Criar controlador de administração dos próprios dados /admin/eu
-            Route::resource('eu', 'App\Http\Controllers\EuController');
-
-            // As rotas dentro desse grupo precisam ter passado por autenticação 
-            // e ter regra (role) de administração (can: admin)
-            Route::group(['middleware' => ['can:admin']], function() {
-            
-                // Página inicial de administração. Conteúdo depende do nível de permissão
-                Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin'); 
-
-                // Administração de usuários
-                Route::resource('usuarios', 'App\Http\Controllers\UserController');
-
-                // Administração de perfis (roles)
-                Route::resource('perfis', 'App\Http\Controllers\RoleController');
-            });
-
-
-            // As rotas dentro desse grupo precisam ter passado por autenticação 
-            // e ter permissão de desenvolvedor (can: dev)
-            Route::group(['middleware' => ['can:dev']], function() {
-                
-                // Administração de kernel
-                Route::resource('permissoes', 'App\Http\Controllers\PermsController');
-            });
-
+    
+        // As rotas dentro desse grupo precisam ter passado por autenticação 
+        // e ter regra (role) de administração (can: admin)
+        Route::group(['middleware' => ['can:admin']], function() {
+        
+            // Página inicial de administração. Conteúdo depende do nível de permissão
+            Route::get('/', [App\Http\Controllers\AdminController::class, 'index'])->name('admin'); 
+    
+            // Administração de usuários
+            Route::resource('usuarios', 'App\Http\Controllers\UserController');
+    
+            // Administração de perfis (roles)
+            Route::resource('perfis', 'App\Http\Controllers\RoleController');
         });
+    
+    
+        // As rotas dentro desse grupo precisam ter passado por autenticação 
+        // e ter permissão de desenvolvedor (can: dev)
+        Route::group(['middleware' => ['can:dev']], function() {
+            Route::resource('permissoes', 'App\Http\Controllers\PermsController');
+        });
+    
     });
+});    
+
+

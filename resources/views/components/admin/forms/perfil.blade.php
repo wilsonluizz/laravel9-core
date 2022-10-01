@@ -10,7 +10,7 @@
     {{-- Identificação do formulário --}}
     <div class="card-header pb-1">
         <div class="row">
-            <div class="col-10">
+            <div class="col-8">
                 <h3 class="pt-1">
                     <i class="bi bi-person-badge me-3"></i> 
                     <span class="text-secondary">Perfil |</span>
@@ -28,7 +28,7 @@
                 </h3>
             </div>
 
-            <div class="col-2 text-end">
+            <div class="col-4 text-end">
 
                 {{-- EDIT --}}
                 @if(!is_null($type))
@@ -187,10 +187,15 @@
                                         <td>
                                             <div class="form-check form-switch">
                                                 @can('admin')
-                                                <input class="form-check-input" type="checkbox" role="switch" name="perms[]" value="{{ $p->id }}" id="{{ $p->id }}" 
-                                                @if($type == 'edit') {{ ($perfil->hasAllPermissions($p) ? 'checked="checked"' : "") }} @endif
-                                                @if(($perfil->id == 1) && ($p->id == 1)) disabled="disabled" @endif>
-                                                <label class="form-check-label d-block ms-2" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
+
+                                                    <input class="form-check-input" type="checkbox" role="switch" name="perms[]" value="{{ $p->id }}" id="{{ $p->id }}" 
+                                                        @if($type == 'edit') 
+                                                            {{ ($perfil->hasAllPermissions($p) ? 'checked="checked"' : "") }} 
+                                                            @if(($perfil->id == 1) && ($p->id == 1)) disabled="disabled" @endif
+                                                        @endif
+                                                    >
+                                                    
+                                                    <label class="form-check-label d-block ms-2" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
                                                 @endcan
                                                 
                                                 @cannot('admin')
@@ -287,20 +292,20 @@
     <div class="card-footer">
 
         <div class="row">
-            <div class="col-10 mt-2">
+            <div class="col-8 mt-2">
                 <a class="text-muted text-decoration-none" href="{{ route('perfis.index') }}">
                     <i class="bi bi-arrow-return-left"></i>
                     <span class="ms-2">Voltar sem alterar nada</span>
                 </a>
             </div>
 
-            <div class="col-2 text-end">
+            <div class="col-4 text-end">
                 <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="{{ ($type == 'edit') ? "Editar" : "Salvar" }} perfil">
                     <span class="d-xs-block d-lg-none">
                         <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }}"></i>
                     </span>                    
                     <span class="d-none d-lg-block">
-                        <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }}"></i>
+                        <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} me-1"></i>
                         {{ ($type == 'edit') ? "Editar" : "Salvar" }} perfil
                     </span>                   
                 </button>

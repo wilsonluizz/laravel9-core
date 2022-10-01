@@ -53,7 +53,7 @@
                         <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdown">
                                 
                             <!-- Alterar as próprias informações -->
-                            <a class="dropdown-item" href="{{ route('eu.edit', Auth::user()->id) }}">Minhas informações</a>
+                            <a class="dropdown-item" href="{{ route('self.index') }}">Minhas informações</a>
                             
                             <hr class="dropdown-divider">
 

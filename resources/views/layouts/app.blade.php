@@ -57,7 +57,7 @@
         
         {{-- Conteúdo principal --}}
         <div class="container-fluid pt-5">
-            <div id="app" class="offset-md-1 col-md-11">
+            <div id="app" class="offset-md-1 col-md-10">
                 @yield('content')
             </div>
         </div>

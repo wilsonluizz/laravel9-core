@@ -12,8 +12,7 @@
                 </div>
             @endif
 
-            <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-            {{-- {{ __('You are logged in!') }} --}}
+            {{ __('You are logged in!') }}
         </div>
     </div>
 
