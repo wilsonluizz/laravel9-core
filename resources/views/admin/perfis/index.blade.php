@@ -55,9 +55,9 @@
                                         </a>
 
                                         {{-- DELETE --}}
-                                        <a class="btn btn-sm btn-danger" href="{{ route('perfis.show', $p->id) }}" data-toggle="tooltip" title="Detalhes do perfil {{ $p->name }}">
+                                        {{-- <a class="btn btn-sm btn-danger" href="{{ route('perfis.show', $p->id) }}" data-toggle="tooltip" title="Detalhes do perfil {{ $p->name }}">
                                             <i class="bi bi-trash-fill"></i>
-                                        </a>
+                                        </a> --}}
                                     
                                     @else
                                     

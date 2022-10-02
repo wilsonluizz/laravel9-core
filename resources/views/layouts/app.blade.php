@@ -29,14 +29,6 @@
 
         {{-- POPPER --}}
         {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> --}}
-        
-        
-        {{-- 
-        Estilos
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-        --}}
-        
     </head>
 
     <body>
