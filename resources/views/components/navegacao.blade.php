@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
-    <div class="container-fluid col-md-10">
+    <div class="container-fluid px-4">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
@@ -53,7 +53,7 @@
                         <div class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="navbarDropdown">
                                 
                             <!-- Alterar as próprias informações -->
-                            <a class="dropdown-item" href="{{ route('eu.edit', Auth::user()->id) }}">Minhas informações</a>
+                            <a class="dropdown-item" href="{{ route('self.index') }}">Minhas informações</a>
                             
                             <hr class="dropdown-divider">
 

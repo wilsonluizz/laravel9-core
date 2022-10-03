@@ -8,16 +8,16 @@
                 <div class="card-header pb-1">
                     <div class="row">
                         <div class="col-8">
-                            <h3 class="pt-1"><i class="bi bi-people-fill me-3"></i> Usuários</h3>
+                            <h3 class="pt-1"><i class="bi bi-toggles me-3"></i> Permissões</h3>
                         </div>
                         <div class="col-4 text-end">
-                            <a class="btn btn-primary" href="{{ route('usuarios.create') }}" data-toggle="tooltip" title="Criar novo usuário">
+                            <a class="btn btn-primary" href="{{ route('permissoes.create') }}" data-toggle="tooltip" title="Criar uma permissão">
                                 <span class="d-lg-none">
                                     <i class="bi bi-plus-lg"></i>
                                 </span>
                                 <span class="d-none d-lg-block">
                                     <i class="bi bi-plus-lg me-1"></i>
-                                    Novo usuário
+                                    Nova permissão
                                 </span>
                             </a>
                         </div>
@@ -28,51 +28,42 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th class="col-3">Nome</th>
-                                <th class="col-3">E-mail</th>
-                                <th class="col-3">Perfis de usuário</th>
+                                <th class="col-3">Permissão</th>
+                                <th class="col-6">Descrição</th>
                                 <th class="col-2 text-center">Criado em</th>
                                 <th class="col-1 text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($usuarios as $u)
+                            @foreach ($perms as $p)
                             <tr>
-                                <td>{{ $u->name }}</td>
-                                <td>{{ $u->email }}</td>
-                                <td>
-                                    @if(!empty($u->getRoleNames()))
-                                        @foreach($u->getRoleNames() as $perfil)
-                                        <label class="badge bg-success px-2 py-1">
-                                            <i class="fas fa-check mr-1"></i>
-                                            {{ $perfil }}
-                                        </label>
-                                        @endforeach
-                                    @endif
-                                </td>
-                                <td class="text-center">{{ date('d/m/Y', strtotime($u->created_at)) }}</td>
-                                <td class="text-center">
-                                    
-                                    @can('admin')
+                                <td>{{ $p->name }}</td>
+                                <td>{{ $p->description }}</td>
+                                <td class="text-center">{{ date('d/m/Y', strtotime($p->created_at)) }}</td>
 
-                                        <a class="btn btn-sm btn-secondary" href="{{ route('usuarios.edit', $u->id) }}" data-toggle="tooltip" title="Editar {{ $u->name }}">
+                                <td class="text-center">
+
+                                    @can('admin')
+                                    
+                                        <a class="btn btn-sm btn-secondary" href="{{ route('permissoes.edit', $p->id) }}" data-toggle="tooltip" title="Editar {{ $p->name }}">
                                             <i class="bi bi-pencil-fill"></i>
                                         </a>
 
                                         {{-- DELETE --}}
-                                        {{-- <a class="btn btn-sm btn-danger" href="{{ route('usuarios.show', $u->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $u->name }}">
+                                        {{-- <button class="btn btn-sm btn-danger" data-toggle="tooltip" title="Excluir permissão {{ $p->name }}" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             <i class="bi bi-trash-fill"></i>
-                                        </a> --}}
-
+                                        </button> --}}
+                                    
                                     @else
-
-                                        <a class="btn btn-sm btn-primary" href="{{ route('usuarios.show', $u->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $u->name }}">
+                                    
+                                        <a class="btn btn-sm btn-primary" href="{{ route('permissoes.show', $p->id) }}" data-toggle="tooltip" title="Detalhes de {{ $p->name }}">
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
 
                                     @endcan
 
                                 </td>
+
                             </tr>
                             @endforeach
                         </tbody>

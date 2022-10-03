@@ -1,15 +1,15 @@
 {{-- Habilita o formulário apenas para $type CREATE e EDIT --}}
 @if(!is_null($type))
     <form action="{{ ($type == 'edit') ? route('usuarios.update', $usuario->id) : route('usuarios.store') }}" method="post">
-
     @csrf
+
     @if($type == 'edit') @method('PUT') @endif
 
 @endif
 
     <div class="card-header pb-1">
         <div class="row">
-            <div class="col-10">
+            <div class="col-8">
                 <h3 class="pt-1">
                     <i class="bi bi-person-fill me-3"></i> 
                     <span class="text-secondary">Usuário |</span>
@@ -27,31 +27,28 @@
                 </h3>
             </div>
 
-            <div class="col-2 text-end">
+            <div class="col-4 text-end">
                 
                 @if(!is_null($type))
                 
-                    {{-- EDIT || Habilita exclusão caso tenha essa permissão --}}
-                    @if($type == "edit")
+                    {{-- 
+                        EDIT | Habilita exclusão caso tenha essa permissão.
+                        Não permite excluir as permissões 'admin' e 'dev'
+                    --}}
+                    @if(($type == "edit") && ($usuario->id > 1))
                         @can('admin')
-                            <button class="btn btn-danger" type="submit" data-toggle="tooltip" title="Apagar {{ $usuario->name }}" id="confirmarExclusao">
-                                {{-- 
-                                    FIXME: Habilitar modal para exclusão
-                                    FIXME: Formulário para exclusão
-                                --}}
-                                
-                                {{-- Botão para telas pequenas --}}
+                            <a class="btn btn-danger" type="button" data-toggle="tooltip" title="Apagar {{ $usuario->name }}" data-bs-toggle="modal" data-bs-target="#confirmarExclusao">
                                 <span class="d-xs-block d-lg-none">
                                     <i class="bi bi-trash-fill"></i>
-                                </span>    
-                                
-                                {{-- Botão para telas grandes --}}
+                                </span>                    
                                 <span class="d-none d-lg-block">
                                     <i class="bi bi-trash-fill me-1"></i>
                                     Excluir usuário
-                                </span>        
+                                </span>
+                            </a>
 
-                            </button>
+                            <x-modal.confirmar-exclusao o="usuarios" :n="$usuario->name" :id="$usuario->id" />
+
                         @endcan
                     @endif
 
@@ -87,14 +84,11 @@
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                 <h5>Informações pessoais</h5>
                 <p class="text-secondary">
-                    <i class="fas fa-lock text-primary pr-2"></i>
                     <span class="badge bg-primary me-1">LGPD</span>
                     Informações criptografadas
-
                     {{-- 
                         FIXME: Incluir criptografia de dados
                     --}}
-
                 </p> 
             </div>
             
@@ -113,7 +107,6 @@
 
                             <input type="text" name="name" class="form-control" id="nome" aria-describedby="dicaNome" @if($type == 'edit') value="{{ $usuario->name }}" @endif />
                             <small id="dicaNome" class="form-text text-muted"><strong>Obrigatório</strong>. Utilize o nome completo, sem abreviaturas</small>
-
 
                         {{-- SHOW || Exibe Nome --}}
                         @else
@@ -147,12 +140,19 @@
                             Senha
                         </label>
 
-                        @if(!is_null($type))
-                            <input type="password" name="password" class="form-control" id="password" aria-describedby="dicaPassword" @if($type == 'edit') disabled="disabled" @endif />
-                            @if($type == 'edit') 
-                                <small id="dicaPassword" class="form-text text-muted"><strong>Desabilitado</strong>. Você não pode trocar a senha de outro usuário</small>
-                            @else
+                        @if((!is_null($type)))
+                            @if($type == 'create') 
+                                <input type="password" name="password" class="form-control" id="password" aria-describedby="dicaPassword" />
                                 <small id="dicaPassword" class="form-text text-muted"><strong>Obrigatório</strong>. Utilize uma senha forte - use letras maiúsculas, minúsculas e caracteres especiais (#, @, $, ...)</small>
+                            
+                            {{-- EDIT | Permite mudar apenas a própria senha --}}
+                            @else
+                                @if($usuario->id === Auth::user()->id)
+                                    <input type="password" name="password" class="form-control" id="password" aria-describedby="dicaPassword" />
+                                    <small id="dicaPassword" class="form-text text-muted"><strong>Obrigatório</strong>. Utilize uma senha forte - use letras maiúsculas, minúsculas e caracteres especiais (#, @, $, ...)</small>
+                                @else
+                                    <small class="text-muted">***********</small>
+                                @endif
                             @endif
                         @else
                             <small class="text-muted">***********</small>
@@ -171,7 +171,6 @@
             <div class="col-12 col-sm-12 col-md-3 col-lg-3">
                 <h5>Perfis</h5>
                 <p class="text-secondary">
-                    <i class="fas fa-lock text-primary pr-2"></i>
                     <span class="badge bg-danger me-1">Atenção</span>
                     Os <strong>perfis</strong> contém um grupo de permissões que
                     definem o que o usuário poderá executar na plataforma
@@ -180,6 +179,7 @@
             
             
             <div class="col-12 col-sm-12 col-md-9 col-lg-9">
+
                 <div class="row table-responsive">
 
                     <table class="table table-hover">
@@ -196,7 +196,12 @@
                                 <tr>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" name="perfis[]" value="{{ $p->id }}" id="{{ $p->id }}" @if($type == 'edit') {{ ($usuario->hasRole($p) ? 'checked="checked"' : "") }} @endif>
+                                            <input class="form-check-input" type="checkbox" role="switch" name="perfis[]" value="{{ $p->id }}" id="{{ $p->id }}" 
+                                                @if($type == 'edit') {{ ($usuario->hasRole($p) ? 'checked="checked"' : "") }} 
+                                                    @if(($usuario->id == 1) && ($p->id == 1)) disabled="disabled" @endif
+                                                @endif
+                                            >
+                                            
                                             <label class="form-check-label d-block pe-auto ms-3" for="{{ $p->id }}" role="button">{{ $p->name }}</label>
                                         </div>
                                     </td>
@@ -216,7 +221,7 @@
                                     @if($usuario->hasAllRoles($p->name))
                                         <tr>
                                             <td>
-                                                <label><i class="bi bi-check me-2 fs-5 text-success"></i>{{ $p->name }}</label>
+                                                {{ $p->name }}
                                             </td>
                                             <td>
                                                 @if(!is_null($p->description))
@@ -233,34 +238,32 @@
 
                         </tbody>
                     </table>
-
                     
-
                 </div>
             </div>
         </div>
-    
     </div>
 
+    {{-- Pé do cartão --}}
     <div class="card-footer">
 
         <div class="row">
 
-            <div class="col-10 mt-2">
+            <div class="col-8 mt-2">
                 <a class="text-muted text-decoration-none" href="{{ route('usuarios.index') }}">
                     <i class="bi bi-arrow-return-left"></i>
                     <span class="ms-2">Voltar @if(!is_null($type)) sem {{ ($type == 'create' ? 'criar usuário' : 'editar informações')  }} @else à página anterior @endif</span>
                 </a>
             </div>
 
-            <div class="col-2 text-end">
+            <div class="col-4 text-end">
                 @if(!is_null($type))
                     <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="{{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário">
                         <span class="d-xs-block d-lg-none">
                             <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }}"></i>
                         </span>                    
                         <span class="d-none d-lg-block">
-                            <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }}"></i>
+                            <i class="bi {{ ($type == 'edit') ? "bi-pencil-square" : "bi-save" }} me-1"></i>
                             {{ ($type == 'edit') ? "Editar" : "Salvar" }} usuário
                         </span>                   
                     </button>
