@@ -42,7 +42,7 @@ class CentroDeCustoController extends Controller
             'codigo' => $request->codigo,
             'responsavel' => $request->responsavel
         ]);
-        return redirect()->route('centros-de-custo.index');
+        return redirect()->route('centros-de-custo.index')->with('info','Centro de custo criado com sucesso!');
     }
 
     /**
@@ -87,7 +87,7 @@ class CentroDeCustoController extends Controller
         $centro_de_custo->responsavel = $request->responsavel;
         $centro_de_custo->codigo = $request->codigo;
         $centro_de_custo->save();
-        return redirect()->route('centros-de-custo.index');
+        return redirect()->route('centros-de-custo.index')->with('success','Centro de custo alterado com sucesso!');;
     }
 
     /**

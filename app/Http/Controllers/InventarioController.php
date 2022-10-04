@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CentroDeCusto;
+use App\Models\Equipamento;
 use App\Models\Localidade;
 
 class InventarioController extends Controller
@@ -17,8 +18,9 @@ class InventarioController extends Controller
     {
         $localidades = Localidade::orderBy('nome')->get();
         $centro_de_custo = CentroDeCusto::orderBy('nome')->get();
-        $dadosView = compact('localidades', 'centro_de_custo');
-        return view('index', $dadosView);
+        $equipamentos = Equipamento::orderBy('nome')->get();
+        //$dadosView = compact('localidades', 'centro_de_custo', 'equipamento');
+        return view('inventario.index', compact('localidades', 'centro_de_custo', 'equipamentos'));
     }
     
     /**
@@ -28,7 +30,7 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('inventario.create');
     }
 
     /**

@@ -19,15 +19,15 @@
                             <div class="form-row my-2">
                                 <div class="row my-2">
                                     <input type="text" maxlength="50" name="nome" class="form-control"
-                                        value="{{ $local->nome }}"">
+                                        value="{{ $local->nome }}"" required>
                                 </div>
                                 <div class="row my-2">
                                     <input type="text" maxlength="50" name="cidade" class="form-control"
-                                        value="{{ $local->cidade }}">
+                                        value="{{ $local->cidade }}" required>
                                 </div>
                                 <div class="row my-2">
                                     <input type="text" maxlength="2" name="uf" class="form-control"
-                                        value="{{ $local->uf }}">
+                                        value="{{ $local->uf }}" required>
                                 </div>
                             </div>
 

@@ -28,15 +28,15 @@
                             <div class="form-row my-2">
                                 <div class="row my-2">
                                     <input type="text" maxlength="50" name="nome" class="form-control"
-                                        value="{{ $centro_de_custo->nome }}"">
+                                        value="{{ $centro_de_custo->nome }}"" required>
                                 </div>
                                 <div class="row my-2">
                                     <input type="text" maxlength="50" name="responsavel" class="form-control"
-                                        value="{{ $centro_de_custo->responsavel }}">
+                                        value="{{ $centro_de_custo->responsavel }}" required>
                                 </div>
                                 <div class="row my-2">
                                     <input type="text   " name="codigo" class="form-control"
-                                        value="{{ $centro_de_custo->codigo }}">
+                                        value="{{ $centro_de_custo->codigo }}" required>
                                 </div>
                             </div>
 

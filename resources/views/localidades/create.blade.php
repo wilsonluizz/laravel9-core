@@ -15,13 +15,13 @@
                         @csrf
                         <div class="form-row my-2">
                             <div class="row my-2">
-                                <input type="text" maxlength="50" name="nome" class="form-control" placeholder="Nome">
+                                <input type="text" maxlength="50" name="nome" class="form-control" placeholder="Nome" required>
                             </div>
                             <div class="row my-2">
-                                <input type="text" maxlength="50" name="cidade" class="form-control" placeholder="cidade">
+                                <input type="text" maxlength="50" name="cidade" class="form-control" placeholder="cidade" required>
                             </div>
                             <div class="row my-2">
-                                <input type="text" maxlength="2" name="uf" class="form-control" placeholder="UF" required>
+                                <input type="text" minlength="2" maxlength="2" name="uf" class="form-control" placeholder="UF" required>
                             </div>
                         </div>
 

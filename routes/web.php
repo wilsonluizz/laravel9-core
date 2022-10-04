@@ -35,6 +35,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('centros-de-custo', 'App\Http\Controllers\CentroDeCustoController');
     Route::resource('localidades', 'App\Http\Controllers\LocalidadeController');
+    Route::resource('inventario', 'App\Http\Controllers\InventarioController');
 
 
 
@@ -80,3 +81,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+
+
+
+

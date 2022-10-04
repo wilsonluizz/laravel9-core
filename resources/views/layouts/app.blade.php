@@ -27,6 +27,7 @@
 
         <div class="container-fluid pt-5">
             <div id="app">
+                @include('flash-message')
                 @yield('content')
             </div>
         </div>

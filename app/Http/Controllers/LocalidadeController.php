@@ -35,13 +35,20 @@ class LocalidadeController extends Controller
      */
     public function store(Request $request)
     {
+       
+        if (strlen($request->uf) != 2 ) {
+            return back()->with('error', 'O campo UF deve conter dois caracteres');
+        }
+
+        
+
         $r = Localidade::create([
             'nome' => ucwords($request->nome),
             'cidade' => ucwords($request->cidade),
             'uf' => strtoupper($request->uf)
         ]);
 
-        return redirect()->route('localidades.index');
+        return redirect()->route('localidades.index')->with('success','Localidade criada com sucesso!');;
     }
 
     /**
@@ -84,7 +91,7 @@ class LocalidadeController extends Controller
         $local->cidade = $request->cidade;
         $local->uf = $request->uf;
         $local->save();
-        return redirect()->route('localidades.index');
+        return redirect()->route('localidades.index')->with('info', 'Localidade alterada com sucesso!');
     }
 
     /**
