@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Localidade extends Model
 {
-    protected $table = 'localidades';
+    
     protected $fillable = ['nome', 'cidade', 'uf'];
 }

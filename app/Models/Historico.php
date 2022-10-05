@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CentroDeCusto extends Model
+class Historico extends Model
 {
-    
-    protected $fillable = ['nome', 'codigo', 'responsavel'];
+    use HasFactory;
 }
