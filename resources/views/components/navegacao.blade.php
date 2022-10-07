@@ -20,6 +20,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('localidades.*') ? 'active' : '' }}" href="{{ route('localidades.index') }}">Localidades</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('equipamentos.*') ? 'active' : '' }}" href="{{ route('equipamentos.index') }}">Equipamentos</a>
+                </li>
             </ul>
 
 

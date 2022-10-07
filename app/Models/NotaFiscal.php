@@ -9,4 +9,8 @@ class NotaFiscal extends Model
 {
     use HasFactory;
     protected $table = 'notas_fiscais';
+
+    public function equipamento(){
+        return $this->belongsTo('App\Models\Equipamento', 'id_nota_fiscal');
+    }
 }

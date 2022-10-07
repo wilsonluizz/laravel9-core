@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Historico extends Model
 {
     use HasFactory;
+
+    public function equipamento(){
+        return $this->hasOne('App\Model\Equipamento');
+    }
+
+    public function responsavel(){
+        return $this->hasOne('AppZmodels\Responsavel', 'id_historico');
+    }
 }

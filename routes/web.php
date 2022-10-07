@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\Route;
     Route::resource('centros-de-custo', 'App\Http\Controllers\CentroDeCustoController');
     Route::resource('localidades', 'App\Http\Controllers\LocalidadeController');
     Route::resource('inventario', 'App\Http\Controllers\InventarioController');
+    Route::resource('equipamentos', 'App\Http\Controllers\EquipamentoController');
 
 
 
