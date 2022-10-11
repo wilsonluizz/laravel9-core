@@ -10,6 +10,6 @@ class Marca extends Model
     use HasFactory;
 
     public function equipamento(){
-        return $this->belongsTo('App\Models\Equipamento', 'id_marca');
+        return $this->hasMany('App\Models\Equipamento', 'id_marca');
     }
 }

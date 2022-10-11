@@ -11,7 +11,7 @@ class Responsavel extends Model
     protected $table = 'responsaveis';
 
     public function equipamento(){
-        return $this->belongsTo('App\Models\Equipamento', 'id_responsavel');
+        return $this->hasMany('App\Models\Equipamento', 'id_responsavel');
     }
 
     public function historico(){

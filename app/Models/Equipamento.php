@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Equipamento extends Model
 {
+    protected $fillable = ['nome', 'descricao', 'id_marca', 'modelo',
+    'numero_serie', 'id_centro_de_custo', 'id_localidade', 'id_responsavel', 
+    'id_nota_fiscal', 'id_categoria'];
     use HasFactory;
 
     public function localidade(){
@@ -31,11 +34,13 @@ class Equipamento extends Model
     }
 
     public function notaFiscal(){
-        return $this->belongsTo('App\Model\NotaFiscal', 'id_nota_fiscal');
+        return $this->belongsTo('App\Models\NotaFiscal', 'id_nota_fiscal');
     }
 
     public function responsavel(){
-        return $this->belongsTo('App\Modes\Responsavel', 'id_responsavel');
+
+        return $this->belongsTo('App\Models\Responsavel', 'id_responsavel');
+
     }
 
 }

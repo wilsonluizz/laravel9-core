@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('historicos', function (Blueprint $table) {
-            $table->unsignedBigInteger('equipamento_id')->after('id');
+        Schema::table('equipamentos', function (Blueprint $table) {
+            $table->renameColumn('codigo_inventario', 'modelo');
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('historicos', function (Blueprint $table) {
-            $table->dropColumn('equipamento_id');   
+        Schema::table('equipamentos', function (Blueprint $table) {
+            $table->renameColumn('modelo', 'codigo_inventario');
         });
     }
 };

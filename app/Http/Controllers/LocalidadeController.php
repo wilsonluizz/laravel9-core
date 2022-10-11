@@ -48,7 +48,7 @@ class LocalidadeController extends Controller
             'uf' => strtoupper($request->uf)
         ]);
 
-        return redirect()->route('localidades.index')->with('success','Localidade criada com sucesso!');;
+        return redirect()->route('localidades.index')->with('success','Localidade criada com sucesso!');
     }
 
     /**
