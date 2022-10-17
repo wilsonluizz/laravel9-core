@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CentroDeCusto;
+use App\Models\Responsavel;
+
 class CentroDeCustoController extends Controller
 {
     /**
@@ -24,7 +26,8 @@ class CentroDeCustoController extends Controller
      */
     public function create()
     {
-        return view('centros_de_custo.create');
+        $responsaveis = Responsavel::orderBy('id', 'desc')->get();
+        return view('centros_de_custo.create', compact('responsaveis'));
     }
 
     /**

@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-8">
-                <div class="card position-absolute top-50 start-50 translate-middle">
+                <div class="card">
                     <div class="card-header pb-1">
                         <div>
                             <h3 class="pt-1"><i class="bi bi-plus-square-fill"></i> Criar novo centro de custo</h3>
@@ -13,15 +13,21 @@
                     <div class="card-body table-responsive">
                         <form action="{{ route('centros-de-custo.store') }}" method="POST">
                             @csrf
-                            <div class="form-row my-2">
-                                <div class="row my-2">
+                            <div class="row">
+                                <div class="col-md-4 my-2">
                                     <input type="text" maxlength="50" name="nome" class="form-control" placeholder="Nome" required>
                                 </div>
-                                <div class="row my-2">
-                                    <input type="text" maxlength="50" name="responsavel" class="form-control" placeholder="Responsavel" required>
-                                </div>
-                                <div class="row my-2">
+                                <div class="col-4 my-2">
                                     <input type="text   " name="codigo" class="form-control" placeholder="Codigo" required>
+                                </div>
+                                <div class="col-md-4 my-2">
+                                    <select name="select_resp" class="form-select" id="select_resp"
+                                        aria-label="Floating label select example">
+                                        <option selected>Selecione responsável </option>
+                                        @foreach ($responsaveis as $resp)
+                                            <option value="{{ $resp->id }}">{{ $resp->nome }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 

@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\DeployCore;
+use Database\Seeders\InventarioSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        DeployCore::run();
+        InventarioSeeder::run();
+
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

@@ -40,7 +40,7 @@
                         <tr>
                             <td>{{ $local->nome }}</td>
                             <td>{{ $local->cidade }}</td>
-                            <td>{{ $local->uf }}</td>
+                            <td>{{ $local->uf->uf }}</td>
                             
                             <td>{{ date('d/m/Y', strtotime($local->created_at)) }}</td>
                             <td class="text-center">

@@ -10,6 +10,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item"><strong>Categoria</strong> {{ $equip->categoria->nome }}</li>
+                      <li class="list-group-item"><strong>Tipo</strong> {{ $equip->tipo->tipo }}</li>
                       <li class="list-group-item"><strong>Marca:</strong> {{ $equip->marca->nome }}</li>
                       <li class="list-group-item"><strong>Modelo</strong> {{ $equip->modelo }}</li>
                       <li class="list-group-item"><strong>Centro de custo</strong> {{ $equip->centroDeCusto->nome }}</li>
@@ -19,6 +20,7 @@
                       {{ $equip->responsavel->nome }} </li>
                       <li class="list-group-item"><strong>Número de nota fiscal</strong> {{ $equip->notaFiscal->numero }}</li>
                       <li class="list-group-item"><strong>Descrição do equipamento</strong> {{ $equip->descricao }} </li> 
+                      <li class="list-group-item"><Strong>Patrimônio</Strong> {{ $equip->patrimonio }}</li>
                     </ul>
                   </div>
                 <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i class="bi bi-back"></i></button>

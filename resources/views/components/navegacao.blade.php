@@ -23,6 +23,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('equipamentos.*') ? 'active' : '' }}" href="{{ route('equipamentos.index') }}">Equipamentos</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('responsaveis.*') ? 'active' : '' }}" href="{{ route('responsaveis.index') }}">Responsáveis</a>
+                </li>
             </ul>
 
 

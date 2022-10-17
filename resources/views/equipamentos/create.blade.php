@@ -17,7 +17,7 @@
                                 <input type="text" minlength="4" maxlength="50" class="form-control" name="nome"
                                     placeholder="Nome" required>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <label for="select_categoria" class="form-label">Categoria</label>
                                 <select name="select_categoria" class="form-select" id="select_categoria"
                                     aria-label="Floating label select example">
@@ -27,21 +27,34 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="col-md-3">
+                                <label for="select_tipo" class="form-label">Tipo</label>
+                                <select name="select_tipo" class="form-select" id="select_tipo"
+                                    aria-label="Floating label select example">
+                                    <option selected>Selecione o tipo</option>
+                                    @foreach ($tipos as $tipo)
+                                        <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            
                             <div class="col-6">
                                 <label for="select_marca" class="form-label">Marca</label>
-                                <select name="select_marca" class="form-select" id="select_marca" aria-label="Floating label select example">
+                                <select name="select_marca" class="form-select" id="select_marca"
+                                    aria-label="Floating label select example">
                                     <option selected>Selecione marca</option>
                                     @foreach ($marcas as $marca)
-                                    <option value="{{ $marca->id }}">{{ $marca->nome }}</option>
+                                        <option value="{{ $marca->id }}">{{ $marca->nome }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-6">
                                 <label for="select_cc" class="form-label">Centro de custo</label>
-                                <select name="select_cc" class="form-select" id="select_cc" aria-label="Floating label select example">
+                                <select name="select_cc" class="form-select" id="select_cc"
+                                    aria-label="Floating label select example">
                                     <option selected>Selecione o centro de custo</option>
                                     @foreach ($centro_de_custo as $cc)
-                                    <option value="{{ $cc->id }}">{{ $cc->nome }}</option>
+                                        <option value="{{ $cc->id }}">{{ $cc->nome }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -57,40 +70,49 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="select_local" class="form-label">Localidade</label>
-                                <select name="select_local" class="form-select" id="select_local" aria-label="Floating label select example">
+                                <select name="select_local" class="form-select" id="select_local"
+                                    aria-label="Floating label select example">
                                     <option selected>Selecione a Localidade</option>
                                     @foreach ($localidades as $local)
-                                    <option value="{{ $local->id }}">{{ $local->nome }}</option>
+                                        <option value="{{ $local->id }}">{{ $local->nome }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <label for="select_resp" class="form-label">Responsável</label>
-                                <select name="select_resp" class="form-select" id="select_resp" aria-label="Floating label select example">
+                                <select name="select_resp" class="form-select" id="select_resp"
+                                    aria-label="Floating label select example">
                                     <option selected>Selecione responsável pelo equipamento</option>
                                     @foreach ($responsavel as $resp)
-                                    <option value="{{ $resp->id }}">{{ $resp->nome }}</option>
+                                        <option value="{{ $resp->id }}">{{ $resp->nome }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <label for="select_nota_fiscal" class="form-label">Número de nota fiscal</label>
-                                <select name="select_nota_fiscal" class="form-select" id="select_nota_fiscal" aria-label="Floating label select example">
+                                <select name="select_nota_fiscal" class="form-select" id="select_nota_fiscal"
+                                    aria-label="Floating label select example">
                                     <option selected>Nota fiscal do equipamento</option>
                                     @foreach ($notafiscal as $nota)
-                                    <option value="{{ $nota->id }}">{{ $nota->numero }}</option>
+                                        <option value="{{ $nota->id }}">{{ $nota->numero }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class=" col-md-12 mb-3">
+                            <div class=" col-md-6 mb-3">
                                 <label for="descricao" class="form-label">Descreva os detalhes do equipamento</label>
                                 <textarea name="descricao" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                              </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="patrimonio" class="form-label">Patrimônio</label>
+                                <input type="text" class="form-control" name="patrimonio" placeholder="Se o equipamento for patrimoniado, digite o codigo aqui">
+                            </div>
+                            
                             <div class="col-12">
                                 <button form="form_create" type="submit" class="btn btn-primary mt-3"><i
                                         class="bi bi-check"></i></button>
-                                <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i
-                                        class="bi bi-back"></i></button>
+                                <button onclick="javascript:history.back(-1) " type="button"
+                                    class="btn btn-info mt-3"><i class="bi bi-back"></i></button>
                             </div>
                         </form>
                     </div>

@@ -20,7 +20,7 @@ class DeployCore extends Seeder
      *
      * @return void
      */
-    public function run()
+    public static function run()
     {
         // Criar o usuário raiz
         $root = User::create([

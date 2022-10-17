@@ -1,4 +1,4 @@
-<select class="form-select" {{ $attributes->merge(['name' => 'uf', 'id' => 'uf']) }}>
+{{-- <select class="form-select" {{ $attributes->merge(['name' => 'uf', 'id' => 'uf']) }}>
 
     @foreach (array_keys($uf) as $uf)
 
@@ -10,4 +10,4 @@
 
     @endforeach
 
-</select>
+</select> --}}
