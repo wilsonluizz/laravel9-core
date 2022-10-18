@@ -32,13 +32,13 @@ return new class extends Migration
     public function down()
     {
         Schema::table('equipamentos', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('centro_de_custo_id');
-            $table->dropConstrainedForeignId('localidade_id');
-            $table->dropConstrainedForeignId('categoria_id');
-            $table->dropConstrainedForeignId('tipo_id');
-            $table->dropConstrainedForeignId('marca_id');
-            $table->dropConstrainedForeignId('responsavel_id');
-            $table->dropConstrainedForeignId('nota_fiscal_id');
+            $table->dropConstrainedForeignId(['centro_de_custo_id']);
+            $table->dropConstrainedForeignId(['localidade_id']);
+            $table->dropConstrainedForeignId(['categoria_id']);
+            $table->dropConstrainedForeignId(['tipo_id']);
+            $table->dropConstrainedForeignId(['marca_id']);
+            $table->dropConstrainedForeignId(['responsavel_id']);
+            $table->dropConstrainedForeignId(['nota_fiscal_id']);
         });
     }
 };

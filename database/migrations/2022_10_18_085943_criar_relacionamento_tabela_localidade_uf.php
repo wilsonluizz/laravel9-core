@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('localidades', function (Blueprint $table) {
-            $table->foreign('uf_id')->references('id')->on('localidades');
+            $table->foreign('uf_id')->references('id')->on('unidades_federativas');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('localidades', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('uf_id');
+            $table->dropConstrainedForeignId(['uf_id']);
         });
     }
 };

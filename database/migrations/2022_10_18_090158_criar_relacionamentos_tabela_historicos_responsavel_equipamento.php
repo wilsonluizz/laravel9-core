@@ -27,8 +27,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('historicos', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('equipamento_id');
-            $table->dropConstrainedForeignId('responsavel_id');
+            $table->dropConstrainedForeignId(['equipamento_id']);
+            $table->dropConstrainedForeignId(['responsavel_id']);
         });
     }
 };
