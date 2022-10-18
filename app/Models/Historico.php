@@ -14,6 +14,6 @@ class Historico extends Model
     }
 
     public function responsavel(){
-        return $this->hasOne('AppZmodels\Responsavel', 'id_historico');
+        return $this->hasOne('AppZmodels\Responsavel', 'historico_id');
     }
 }

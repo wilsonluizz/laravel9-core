@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Localidade;
+use App\Models\UnidadeFederativa;
+use App\Models\Responsavel;
+
 class LocalidadeController extends Controller
 {
     /**
@@ -23,8 +26,8 @@ class LocalidadeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('localidades.create');
+    {   $ufs = UnidadeFederativa::orderBy('id')->get();
+        return view('localidades.create', compact('ufs'));
     }
 
     /**
@@ -36,16 +39,15 @@ class LocalidadeController extends Controller
     public function store(Request $request)
     {
        
-        if (strlen($request->uf) != 2 ) {
-            return back()->with('error', 'O campo UF deve conter dois caracteres');
-        }
+        
 
         
 
         $r = Localidade::create([
             'nome' => ucwords($request->nome),
             'cidade' => ucwords($request->cidade),
-            'uf' => strtoupper($request->uf)
+            'uf_id' => $request->select_uf,
+            'cep' => $request->cep
         ]);
 
         return redirect()->route('localidades.index')->with('success','Localidade criada com sucesso!');
@@ -70,9 +72,10 @@ class LocalidadeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
+        $ufs = UnidadeFederativa::orderby('id')->get();
         $local = Localidade::find($id);
-        return view('localidades.edit', compact('local'));
+        return view('localidades.edit', compact('local', 'ufs'));
     }
 
     /**
@@ -89,7 +92,8 @@ class LocalidadeController extends Controller
         
         $local->nome = $request->nome;
         $local->cidade = $request->cidade;
-        $local->uf = $request->uf;
+        $local->uf_id = $request->select_uf;
+        $local->cep = $request->cep;
         $local->save();
         return redirect()->route('localidades.index')->with('info', 'Localidade alterada com sucesso!');
     }

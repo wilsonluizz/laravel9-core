@@ -14,7 +14,7 @@ class CentroDeCustoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $centro_de_custo = CentroDeCusto::orderBy('id', 'desc')->get();
         return view('centros_de_custo.index', compact('centro_de_custo'));
     }
@@ -25,7 +25,7 @@ class CentroDeCustoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         $responsaveis = Responsavel::orderBy('id', 'desc')->get();
         return view('centros_de_custo.create', compact('responsaveis'));
     }
@@ -43,7 +43,7 @@ class CentroDeCustoController extends Controller
         $r = CentroDeCusto::create([
             'nome' => $request->nome,
             'codigo' => $request->codigo,
-            'responsavel' => $request->responsavel
+            'responsavel_id' => $request->select_resp
         ]);
         return redirect()->route('centros-de-custo.index')->with('info','Centro de custo criado com sucesso!');
     }
@@ -68,9 +68,9 @@ class CentroDeCustoController extends Controller
      */
     public function edit($id)
     {
-        
+        $responsaveis = Responsavel::orderBy('id', 'desc')->get();
         $centro_de_custo = CentroDeCusto::find($id);
-        return view('centros_de_custo.edit', compact('centro_de_custo'));
+        return view('centros_de_custo.edit', compact('centro_de_custo', 'responsaveis'));
     }
 
     /**
@@ -82,12 +82,12 @@ class CentroDeCustoController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+        
         $centro_de_custo = CentroDeCusto::find($id);
         
 
         $centro_de_custo->nome = $request->nome;
-        $centro_de_custo->responsavel = $request->responsavel;
+        $centro_de_custo->responsavel_id = $request->select_resp;
         $centro_de_custo->codigo = $request->codigo;
         $centro_de_custo->save();
         return redirect()->route('centros-de-custo.index')->with('success','Centro de custo alterado com sucesso!');;

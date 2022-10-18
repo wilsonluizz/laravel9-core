@@ -25,7 +25,7 @@ class ResponsavelController extends Controller
      */
     public function create()
     {
-        //
+        return view('responsaveis.create');
     }
 
     /**
@@ -36,7 +36,14 @@ class ResponsavelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $r = Responsavel::create([
+            'nome' => ucwords($request->nome),
+            'matricula' => ucwords($request->matricula),
+            'email' => $request->email,
+            'cep' => $request->cep
+        ]);
+
+        return redirect()->route('responsaveis.index')->with('success','Responsável criado com sucesso!');
     }
 
     /**
@@ -46,8 +53,9 @@ class ResponsavelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $responsavel = Responsavel::find($id);
+        return view('responsaveis.show', compact('responsavel'));
     }
 
     /**
@@ -58,7 +66,8 @@ class ResponsavelController extends Controller
      */
     public function edit($id)
     {
-        //
+        $responsavel = Responsavel::find($id);
+        return view('responsaveis.edit', compact('responsavel'));
     }
 
     /**
@@ -70,7 +79,13 @@ class ResponsavelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $responsavel = Responsavel::find($id);
+
+        $responsavel->nome = $request->nome;
+        $responsavel->matricula = $request->matricula;
+        $responsavel->email = $request->email;
+        $responsavel->save();
+        return redirect()->route('responsaveis.index')->with('info', 'Responsável alterado com sucesso!');
     }
 
     /**
@@ -81,6 +96,8 @@ class ResponsavelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Responsavel::find($id)->delete();
+        return redirect()->route('responsaveis.index')->with('info', 'Responsável excluído com sucesso!');
+        
     }
 }

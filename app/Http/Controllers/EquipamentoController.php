@@ -11,6 +11,7 @@ use App\Models\NotaFiscal;
 use App\Models\Marca;
 use App\Models\Categoria;
 use App\Models\Historico;
+use App\Models\Tipo;
 
 class EquipamentoController extends Controller
 {
@@ -32,14 +33,16 @@ class EquipamentoController extends Controller
      */
     public function create()
         
-    {   $categorias = Categoria::orderBy('id', 'desc')->get();
+    {   
+        $tipos = Tipo::orderBy('id', 'desc')->get();
+        $categorias = Categoria::orderBy('id', 'desc')->get();
         $historicos = Historico::orderBy('id', 'desc')->get();
         $marcas = Marca::orderBy('id', 'desc')->get();
         $localidades = Localidade::orderBy('id', 'desc')->get();
         $centro_de_custo = CentroDeCusto::orderBy('id', 'desc')->get();
         $responsavel = Responsavel::orderBy('id', 'desc')->get();
         $notafiscal = NotaFiscal::orderBy('id', 'desc')->get();
-        return view('equipamentos.create', compact('marcas', 'localidades', 'centro_de_custo', 'responsavel', 'notafiscal', 'categorias'));
+        return view('equipamentos.create', compact('marcas', 'localidades', 'centro_de_custo', 'responsavel', 'notafiscal', 'categorias', 'tipos'));
     }
 
     /**
@@ -53,15 +56,17 @@ class EquipamentoController extends Controller
             // dd($request);
             $r = Equipamento::create([
             'nome' => ucwords($request->nome),
-            'id_categoria' => $request->select_categoria,
-            'id_marca' => $request->select_marca,
+            'categoria_id' => $request->select_categoria,
+            'tipo_id' => $request->select_tipo,
+            'marca_id' => $request->select_marca,
             'descricao' => ucfirst($request->descricao),
             'modelo' => $request->modelo,
             'numero_serie' => $request->numero_serie,
-            'id_centro_de_custo' => $request->select_cc,
-            'id_localidade' => $request->select_local,
-            'id_responsavel' => $request->select_resp,
-            'id_nota_fiscal' => $request->select_nota_fiscal
+            'centro_de_custo_id' => $request->select_cc,
+            'localidade_id' => $request->select_local,
+            'responsavel_id' => $request->select_resp,
+            'nota_fiscal_id' => $request->select_nota_fiscal,
+            'patrimonio' => $request->patrimonio
         ]);
 
         return redirect()->route('equipamentos.index')->with('success','Equipamento criado com sucesso!');

@@ -20,14 +20,13 @@ return new class extends Migration
             $table->string('numero_serie');
             $table->string('patrimonio')->nullable();
             $table->text('descricao');
-            $table->unsignedBigInteger('centro_de_custo_id');
+            $table->unsignedBigInteger('centro_custo_id');
             $table->unsignedBigInteger('localidade_id');
             $table->unsignedBigInteger('categoria_id');
             $table->unsignedBigInteger('tipo_id');
+            $table->unsignedBigInteger('responsavel_id');
             $table->unsignedBigInteger('marca_id');
             $table->unsignedBigInteger('nota_fiscal_id');
-            $table->unsignedBigInteger('historico_id');
-            $table->unsignedBigInteger('uf_id');
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@
                         </div>
                     </div>
                     <div class="card-body table-responsive">
-                        <form action="{{ route('centros-de-custo.update', $responsavel->id) }}" id="editar"
+                        <form action="{{ route('responsaveis.update', $responsavel->id) }}" id="editar"
                             method="POST">
                             @csrf
                             @method('put')
@@ -61,7 +61,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <h4>Tem certeza que deseja apagar o responsável? </h4>
+                                        <h4>Tem certeza que deseja apagar o responsável ? </h4>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-info" data-bs-dismiss="modal"><i

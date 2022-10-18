@@ -23,7 +23,7 @@
                                     aria-label="Floating label select example">
                                     <option selected>Selecione Categoria</option>
                                     @foreach ($categorias as $cat)
-                                        <option value="{{ $cat->id }}">{{ $cat->nome }}</option>
+                                        <option value="{{ $cat->id }}">{{ $cat->categoria }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -44,7 +44,7 @@
                                     aria-label="Floating label select example">
                                     <option selected>Selecione marca</option>
                                     @foreach ($marcas as $marca)
-                                        <option value="{{ $marca->id }}">{{ $marca->nome }}</option>
+                                        <option value="{{ $marca->id }}">{{ $marca->marca }}</option>
                                     @endforeach
                                 </select>
                             </div>

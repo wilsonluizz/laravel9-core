@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Marca extends Model
+class Tipo extends Model
 {
     use HasFactory;
 
     public function equipamento(){
-        return $this->hasMany('App\Models\Equipamento', 'marca_id');
+        return $this->hasMany('App\Models\Equipamento', 'tipo_id');
     }
 }

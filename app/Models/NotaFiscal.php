@@ -11,7 +11,7 @@ class NotaFiscal extends Model
     protected $table = 'notas_fiscais';
 
     public function equipamento(){
-        return $this->belongsTo('App\Models\Equipamento', 'id_nota_fiscal');
+        return $this->belongsTo('App\Models\Equipamento', 'nota_fiscal_id');
     }
 
     protected $dates = ['data_emissao'];

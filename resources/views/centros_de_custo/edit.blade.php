@@ -21,9 +21,13 @@
                                     <input type="text" maxlength="50" name="nome" class="form-control"
                                         value="{{ $centro_de_custo->nome }}"" required>
                                 </div>
-                                <div class="col-4 my-2">
-                                    <input type="text" maxlength="50" name="responsavel" class="form-control"
-                                        value="{{ $centro_de_custo->responsavel }}" required>
+                                <div class="col-md-4 my-2">
+                                    <select name="select_resp" class="form-select" id="select_resp"
+                                        aria-label="Floating label select example">
+                                        @foreach ($responsaveis as $resp)
+                                            <option value="{{ $resp->id }}"  {{ $resp->id == $centro_de_custo->responsavel_id ? 'selected' : '' }} >{{ $resp->nome }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-4 my-2">
                                     <input type="text   " name="codigo" class="form-control"

@@ -43,7 +43,7 @@
                         <tr>
                             <td>{{ $cc->nome }}</td>
                             <td>{{ $cc->codigo }}</td>
-                            <td>{{ $cc->responsavel }}</td>
+                            <td>{{ $cc->responsavel->nome}}</td>
                             
                             <td>{{ date('d/m/Y', strtotime($cc->created_at)) }}</td>
                             <td class="text-center">

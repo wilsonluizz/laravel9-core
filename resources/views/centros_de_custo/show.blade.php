@@ -12,7 +12,7 @@
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Código: <strong>{{ $centro_de_custo->codigo }}</strong></li>
-                            <li class="list-group-item">Resonsável: <strong>{{ $centro_de_custo->responsavel }}</strong>
+                            <li class="list-group-item">Resonsável: <strong>{{ $centro_de_custo->responsavel->nome }}</strong>
                             </li>
                             <li class="list-group-item">Data de criação:
                                 <strong>{{ date('d/m/Y', strtotime($centro_de_custo->created_at)) }}<strong>

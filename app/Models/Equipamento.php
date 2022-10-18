@@ -7,40 +7,44 @@ use Illuminate\Database\Eloquent\Model;
 
 class Equipamento extends Model
 {
-    protected $fillable = ['nome', 'descricao', 'id_marca', 'modelo',
-    'numero_serie', 'id_centro_de_custo', 'id_localidade', 'id_responsavel', 
-    'id_nota_fiscal', 'id_categoria'];
+    protected $fillable = ['nome', 'descricao', 'marca_id', 'modelo',
+    'numero_serie', 'centro_de_custo_id', 'localidade_id', 'responsavel_id', 
+    'nota_fiscal_id', 'categoria_id', 'tipo_id', 'patrimonio'];
     use HasFactory;
 
     public function localidade(){
-        return $this->belongsTo('App\Models\Localidade', 'id_localidade');
+        return $this->belongsTo('App\Models\Localidade', 'localidade_id');
     }
 
     public function centroDeCusto(){
-        return $this->belongsTo('App\Models\CentroDeCusto', 'id_centro_de_custo');
+        return $this->belongsTo('App\Models\CentroDeCusto', 'centro_de_custo_id');
     }
 
     
     public function categoria(){
-        return $this->belongsTo('App\Models\Categoria', 'id_categoria');
+        return $this->belongsTo('App\Models\Categoria', 'categoria_id');
     }
 
     public function historico(){
-        return $this->belongsTo('App\Models\Historico', 'id_historico');
+        return $this->belongsTo('App\Models\Historico', 'historico_id');
     }
 
     public function marca(){
-        return $this->belongsTo('App\Models\Marca', 'id_marca');
+        return $this->belongsTo('App\Models\Marca', 'marca_id');
     }
 
     public function notaFiscal(){
-        return $this->belongsTo('App\Models\NotaFiscal', 'id_nota_fiscal');
+        return $this->belongsTo('App\Models\NotaFiscal', 'nota_fiscal_id');
     }
 
     public function responsavel(){
 
-        return $this->belongsTo('App\Models\Responsavel', 'id_responsavel');
+        return $this->belongsTo('App\Models\Responsavel', 'responsavel_id');
 
+    }
+
+    public function tipo(){
+        return $this->belongsTo('App\Models\Tipo', 'tipo_id');
     }
 
 }

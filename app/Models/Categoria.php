@@ -10,6 +10,6 @@ class Categoria extends Model
     use HasFactory;
 
     public function equipamento(){
-        return $this->hasMany('App\Models\Equipamento', 'id_categoria');
+        return $this->hasMany('App\Models\Equipamento', 'categoria_id');
     }
 }

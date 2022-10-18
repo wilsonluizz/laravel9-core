@@ -17,15 +17,15 @@
                             @csrf
                             @method('put')
                             <div class="row my-2">
-                                <div class="col-4 my-2">
+                                <div class="col-3 my-2">
                                     <input type="text" maxlength="50" name="nome" class="form-control"
                                         value="{{ $local->nome }}"" required>
                                 </div>
-                                <div class="col-4 my-2">
+                                <div class="col-3 my-2">
                                     <input type="text" maxlength="50" name="cidade" class="form-control"
                                         value="{{ $local->cidade }}" required>
                                 </div>
-                                <div class="col-4 ">
+                                <div class="col-3 ">
                                     <select name="select_uf" class="form-select my-2" id="select_uf"
                                         aria-label="Floating label select example">
                                         <option selected>Selecione UF</option>
@@ -33,6 +33,10 @@
                                             <option value="{{ $uf->id }}"  {{ $uf->id == $local->uf->id ? 'selected' : '' }} >{{ $uf->uf }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="col-3 my-2">
+                                    <input type="text" maxlength="50" name="cep" class="form-control"
+                                        value="{{ $local->cep }}">
                                 </div>
                             </div>
 
