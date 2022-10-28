@@ -47,11 +47,11 @@
                                 
                                 @can('admin')
 
-                                     <a class="btn btn-sm btn-primary" href="{{ route('localidades.show', $local->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $local->name }}">
+                                     <a class="btn btn-sm btn-info" href="{{ route('localidades.show', $local->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $local->name }}">
                                         <i class="bi bi-eye-fill"></i>
                                     </a>
 
-                                    <a class="btn btn-sm btn-secondary" href="{{ route('localidades.edit', $local->id) }}" data-toggle="tooltip" title="Editar {{ $local->name }}">
+                                    <a class="btn btn-sm btn-primary" href="{{ route('localidades.edit', $local->id) }}" data-toggle="tooltip" title="Editar {{ $local->name }}">
                                         <i class="bi bi-pencil-fill"></i>
                                     </a> 
 

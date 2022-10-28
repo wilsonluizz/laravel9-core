@@ -35,12 +35,11 @@
 
                         
 
-                        <button form="editar" type="submit" class="btn btn-primary mt-3"><i
+                        <button form="editar" type="submit" class="btn btn-success mt-3"><i
                                 class="bi bi-check"></i></button>
 
 
-                        <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i
-                                class="bi bi-back"></i></button>
+                        <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i class="bi bi-reply-fill"></i></button>
 
 
                         <button type="button" class="btn btn-danger delete-btn mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
@@ -64,8 +63,7 @@
                                         <h4>Tem certeza que deseja apagar o responsável ? </h4>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-info" data-bs-dismiss="modal"><i
-                                            class="bi bi-back"></i></button>
+                                        <button type="button" class="btn btn-info" data-bs-dismiss="modal"><i class="bi bi-reply-fill"></i></button>
                                         <button type="submit" form="apagar" type="button" class="btn btn-danger delete-btn"><i class="bi bi-trash"></i></button>
                                     </div>
                                 </div>

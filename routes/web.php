@@ -38,6 +38,18 @@ use Illuminate\Support\Facades\Route;
     Route::resource('inventario', 'App\Http\Controllers\InventarioController');
     Route::resource('equipamentos', 'App\Http\Controllers\EquipamentoController');
     Route::resource('responsaveis', 'App\Http\Controllers\ResponsavelController');
+    
+    Route::resource('equipamentos/{id}/historicos', 'App\Http\Controllers\HistoricoController', ['name' => ['index' => 'historico.index']]);
+    
+    Route::resource('equipamentos/{id}/movimentacao', 'App\Http\Controllers\MovimentacaoController', ['names' =>[
+        'index' => 'movimentacao.index',
+        'create' => 'movimentacao.create',
+        'store' => 'movimentacao.store',
+        'show' => 'movimentacao.show',
+        'edit' => 'movimentacao.edit',
+        'update' => 'movimentacao.update',
+        'destroy' => 'movimentacao.destroy'
+    ]]);
 
 
 

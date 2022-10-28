@@ -21,19 +21,17 @@
                             </div>
                             <div class="col-md-3">
                                 <label for="select_categoria" class="form-label">Categoria</label>
-                                <select name="select_categoria" class="form-select" id="select_categoria"
-                                    aria-label="Floating label select example">
+                                <select name="select_categoria" class="form-select" id="select_categoria" aria-label="" required>
                                     @foreach ($categorias as $cat)
                                         <option value="{{ $cat->id }}"
-                                            {{ $cat->id == $equip->categoria->id ? 'selected' : '' }}>{{ $cat->nome }}
+                                            {{ $cat->id == $equip->categoria->id ? 'selected' : '' }}>{{ $cat->categoria }}
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <label for="select_tipo" class="form-label">Tipo</label>
-                                <select name="select_tipo" class="form-select" id="select_tipo"
-                                    aria-label="Floating label select example">
+                                <select name="select_tipo" class="form-select" id="select_tipo" aria-label="" required>
                                     @foreach ($tipos as $tipo)
                                         <option value="{{ $tipo->id }}"
                                             {{ $tipo->id == $equip->tipo->id ? 'selected' : '' }}>{{ $tipo->tipo }}
@@ -43,17 +41,15 @@
                             </div>
                             <div class="col-6">
                                 <label for="select_marca" class="form-label">Marca</label>
-                                <select name="select_marca" class="form-select" id="select_marca"
-                                    aria-label="Floating label select example">
+                                <select name="select_marca" class="form-select" id="select_marca" aria-label="" required>
                                     @foreach ($marcas as $marca)
-                                        <option value="{{ $marca->id }}">{{ $marca->nome }}</option>
+                                        <option value="{{ $marca->id }}"{{ $marca->id == $equip->marca->id ? 'selected' : '' }}>{{ $marca->marca }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-6">
                                 <label for="select_cc" class="form-label">Centro de custo</label>
-                                <select name="select_cc" class="form-select" id="select_cc"
-                                    aria-label="Floating label select example">
+                                <select name="select_cc" class="form-select" id="select_cc" aria-label="" required>
                                     @foreach ($centro_de_custo as $cc)
                                         <option value="{{ $cc->id }}"
                                             {{ $cc->id == $equip->id_centro_de_custo ? 'selected' : '' }}>
@@ -73,8 +69,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="select_local" class="form-label">Localidade</label>
-                                <select name="select_local" class="form-select" id="select_local"
-                                    aria-label="Floating label select example">
+                                <select name="select_local" class="form-select" id="select_local" aria-label="" required>
                                     @foreach ($localidades as $local)
                                         <option value="{{ $local->id }}">{{ $local->nome }}</option>
                                     @endforeach
@@ -82,8 +77,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="select_resp" class="form-label">Responsável</label>
-                                <select name="select_resp" class="form-select" id="select_resp"
-                                    aria-label="Floating label select example">
+                                <select name="select_resp" class="form-select" id="select_resp" aria-label="" required>
                                     @foreach ($responsavel as $resp)
                                         <option value="{{ $resp->id }}">{{ $resp->nome }}</option>
                                     @endforeach
@@ -91,8 +85,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="select_nota_fiscal" class="form-label">Número de nota fiscal</label>
-                                <select name="select_nota_fiscal" class="form-select" id="select_nota_fiscal"
-                                    aria-label="Floating label select example">
+                                <select name="select_nota_fiscal" class="form-select" id="select_nota_fiscal" aria-label="" required>
                                     @foreach ($notafiscal as $nota)
                                         <option value="{{ $nota->id }}">{{ $nota->numero }}</option>
                                     @endforeach
@@ -112,9 +105,9 @@
                         
 
 
-                        <button form="form_create" type="submit" class="btn btn-primary mt-3"><i class="bi bi-check"></i></button>
+                        <button form="form_create" type="submit" class="btn btn-success mt-3"><i class="bi bi-check"></i></button>
 
-                        <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i class="bi bi-back"></i></button>
+                        <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i class="bi bi-reply-fill"></i></button>
 
                         <button type="button" class="btn btn-danger delete-btn mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
 
@@ -136,8 +129,7 @@
                                         <h4>Tem certeza que deseja apagar este equipamento? </h4>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-info" data-bs-dismiss="modal"><i
-                                            class="bi bi-back"></i></button>
+                                        <button type="button" class="btn btn-info" data-bs-dismiss="modal"><i class="bi bi-reply-fill"></i></button>
                                         <button type="submit" form="apagar" type="button" class="btn btn-danger delete-btn"><i class="bi bi-trash"></i></button>
                                     </div>
                                 </div>

@@ -38,9 +38,7 @@ class CentroDeCustoController extends Controller
      */
     public function store(Request $request)
     {
-        
-        // dd($request->nome);
-        $r = CentroDeCusto::create([
+        $centro_custo = CentroDeCusto::create([
             'nome' => $request->nome,
             'codigo' => $request->codigo,
             'responsavel_id' => $request->select_resp

@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('localidades', function (Blueprint $table) {
-            $table->foreign('uf_id')->references('id')->on('unidades_federativas');
+        Schema::table('movimentacoes', function (Blueprint $table) {
+            $table->dropColumn('tipo_movimentacao');
+            $table->foreignId('tipo_mov_id')->references('id')->on('tipo_movimentacao');
+            
         });
     }
 
@@ -25,8 +27,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('localidades', function (Blueprint $table) {
-            $table->dropConstrainedForeignId(['uf_id']);
+        Schema::table('movimentacoes', function (Blueprint $table) {
+            $table->dropForeign(['tipo_mov_id']);
+            $table->string('tipo_movimentacao');
         });
     }
 };

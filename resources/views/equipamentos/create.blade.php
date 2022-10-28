@@ -13,15 +13,14 @@
                         <form id="form_create" action="{{ route('equipamentos.store') }}" method="POST" class="row g-3">
                             @csrf
                             <div class="col-md-6">
-                                <label for="inputEmail4" class="form-label">Nome</label>
+                                <label for="inputnome" class="form-label">Nome</label>
                                 <input type="text" minlength="4" maxlength="50" class="form-control" name="nome"
                                     placeholder="Nome" required>
                             </div>
                             <div class="col-md-3">
                                 <label for="select_categoria" class="form-label">Categoria</label>
-                                <select name="select_categoria" class="form-select" id="select_categoria"
-                                    aria-label="Floating label select example">
-                                    <option selected>Selecione Categoria</option>
+                                <select name="select_categoria" class="form-select" id="select_categoria" aria-label="" required>
+                                    <option selected disabled>Selecione Categoria</option>
                                     @foreach ($categorias as $cat)
                                         <option value="{{ $cat->id }}">{{ $cat->categoria }}</option>
                                     @endforeach
@@ -29,9 +28,8 @@
                             </div>
                             <div class="col-md-3">
                                 <label for="select_tipo" class="form-label">Tipo</label>
-                                <select name="select_tipo" class="form-select" id="select_tipo"
-                                    aria-label="Floating label select example">
-                                    <option selected>Selecione o tipo</option>
+                                <select name="select_tipo" class="form-select" id="select_tipo" aria-label="" required>
+                                    <option selected disabled>Selecione o tipo</option>
                                     @foreach ($tipos as $tipo)
                                         <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
                                     @endforeach
@@ -40,9 +38,8 @@
                             
                             <div class="col-6">
                                 <label for="select_marca" class="form-label">Marca</label>
-                                <select name="select_marca" class="form-select" id="select_marca"
-                                    aria-label="Floating label select example">
-                                    <option selected>Selecione marca</option>
+                                <select name="select_marca" class="form-select" id="select_marca" aria-label="" required>
+                                    <option selected disabled>Selecione marca</option>
                                     @foreach ($marcas as $marca)
                                         <option value="{{ $marca->id }}">{{ $marca->marca }}</option>
                                     @endforeach
@@ -50,9 +47,8 @@
                             </div>
                             <div class="col-6">
                                 <label for="select_cc" class="form-label">Centro de custo</label>
-                                <select name="select_cc" class="form-select" id="select_cc"
-                                    aria-label="Floating label select example">
-                                    <option selected>Selecione o centro de custo</option>
+                                <select name="select_cc" class="form-select" id="select_cc" aria-label="" required>
+                                    <option selected disabled>Selecione o centro de custo</option>
                                     @foreach ($centro_de_custo as $cc)
                                         <option value="{{ $cc->id }}">{{ $cc->nome }}</option>
                                     @endforeach
@@ -70,9 +66,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="select_local" class="form-label">Localidade</label>
-                                <select name="select_local" class="form-select" id="select_local"
-                                    aria-label="Floating label select example">
-                                    <option selected>Selecione a Localidade</option>
+                                <select name="select_local" class="form-select" id="select_local" aria-label="" required>
+                                    <option selected disabled>Selecione a Localidade</option>
                                     @foreach ($localidades as $local)
                                         <option value="{{ $local->id }}">{{ $local->nome }}</option>
                                     @endforeach
@@ -80,9 +75,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="select_resp" class="form-label">Responsável</label>
-                                <select name="select_resp" class="form-select" id="select_resp"
-                                    aria-label="Floating label select example">
-                                    <option selected>Selecione responsável pelo equipamento</option>
+                                <select name="select_resp" class="form-select" id="select_resp" aria-label="" required>
+                                    <option selected disabled>Selecione responsável pelo equipamento</option>
                                     @foreach ($responsavel as $resp)
                                         <option value="{{ $resp->id }}">{{ $resp->nome }}</option>
                                     @endforeach
@@ -90,9 +84,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="select_nota_fiscal" class="form-label">Número de nota fiscal</label>
-                                <select name="select_nota_fiscal" class="form-select" id="select_nota_fiscal"
-                                    aria-label="Floating label select example">
-                                    <option selected>Nota fiscal do equipamento</option>
+                                <select name="select_nota_fiscal" class="form-select" id="select_nota_fiscal" aria-label="" required>
+                                    <option selected disabled>Nota fiscal do equipamento</option>
                                     @foreach ($notafiscal as $nota)
                                         <option value="{{ $nota->id }}">{{ $nota->numero }}</option>
                                     @endforeach
@@ -100,7 +93,7 @@
                             </div>
                             <div class=" col-md-6 mb-3">
                                 <label for="descricao" class="form-label">Descreva os detalhes do equipamento</label>
-                                <textarea name="descricao" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <textarea name="descricao" class="form-control" id="" rows="3" required></textarea>
                             </div>
                             
                             <div class="col-md-6 mb-3">
@@ -109,10 +102,10 @@
                             </div>
                             
                             <div class="col-12">
-                                <button form="form_create" type="submit" class="btn btn-primary mt-3"><i
+                                <button form="form_create" type="submit" class="btn btn-success mt-3"><i
                                         class="bi bi-check"></i></button>
                                 <button onclick="javascript:history.back(-1) " type="button"
-                                    class="btn btn-info mt-3"><i class="bi bi-back"></i></button>
+                                    class="btn btn-info mt-3"><i class="bi bi-reply-fill"></i></button>
                             </div>
                         </form>
                     </div>

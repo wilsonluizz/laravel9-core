@@ -20,6 +20,9 @@ return new class extends Migration
             $table->integer('cep');
             $table->unsignedBigInteger('uf_id');
             $table->timestamps();
+            $table->softdeletes();
+
+            $table->foreign('uf_id')->references('id')->on('unidades_federativas');
         });
     }
 
@@ -30,6 +33,10 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('localidades', function (Blueprint $table) {
+            $table->dropForeign(['uf_id']);
+        });
+
         Schema::dropIfExists('localidades');
     }
 };

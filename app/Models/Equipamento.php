@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Equipamento extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = ['nome', 'descricao', 'marca_id', 'modelo',
     'numero_serie', 'centro_de_custo_id', 'localidade_id', 'responsavel_id', 
     'nota_fiscal_id', 'categoria_id', 'tipo_id', 'patrimonio'];
-    use HasFactory;
+    
 
     public function localidade(){
         return $this->belongsTo('App\Models\Localidade', 'localidade_id');
@@ -23,10 +25,6 @@ class Equipamento extends Model
     
     public function categoria(){
         return $this->belongsTo('App\Models\Categoria', 'categoria_id');
-    }
-
-    public function historico(){
-        return $this->belongsTo('App\Models\Historico', 'historico_id');
     }
 
     public function marca(){
@@ -47,4 +45,13 @@ class Equipamento extends Model
         return $this->belongsTo('App\Models\Tipo', 'tipo_id');
     }
 
+    public function movimentacao(){
+        return $this->hasMany('App\Models\Movimentacao', 'equipamento_id');
+    }
+
+    public function historico(){
+        return $this->hasMany('App\Models\HistoricoEquipamento', 'equipamento_id');
+    }
+
+    
 }

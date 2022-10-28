@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('numero', 50);
             $table->double('valor', 8, 2);
             $table->string('sc_origem');
-            $table->dateTime('data_emissão')->nullable();
+            $table->dateTime('data_emissao')->nullable();
             $table->timestamps();
+            $table->softdeletes();
         });
     }
 

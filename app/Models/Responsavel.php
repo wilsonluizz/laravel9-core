@@ -2,22 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Responsavel extends Model
 {
-    use HasFactory;
+    use SoftDeletes;
+    
     protected $table = 'responsaveis';
 
     protected $fillable = ['nome', 'matricula', 'email'];
 
     public function equipamento(){
         return $this->hasMany('App\Models\Equipamento', 'responsavel_id');
-    }
-
-    public function historico(){
-        return $this->belongsTo('App\Models\Historico', 'responsavel_id');
     }
 
     public function centroDeCusto(){

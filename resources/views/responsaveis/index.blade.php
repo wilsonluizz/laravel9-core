@@ -47,11 +47,11 @@
                                 
                                 @can('admin')
 
-                                     <a class="btn btn-sm btn-primary" href="{{ route('responsaveis.show',  $resp->id) }}" data-toggle="tooltip" title="Ver detalhes de {{  $resp->name }}">
+                                     <a class="btn btn-sm btn-info" href="{{ route('responsaveis.show',  $resp->id) }}" data-toggle="tooltip" title="Ver detalhes de {{  $resp->name }}">
                                         <i class="bi bi-eye-fill"></i>
                                     </a>
 
-                                    <a class="btn btn-sm btn-secondary" href="{{ route('responsaveis.edit',  $resp->id) }}" data-toggle="tooltip" title="Editar {{  $resp->name }}">
+                                    <a class="btn btn-sm btn-primary" href="{{ route('responsaveis.edit',  $resp->id) }}" data-toggle="tooltip" title="Editar {{  $resp->name }}">
                                         <i class="bi bi-pencil-fill"></i>
                                     </a> 
 

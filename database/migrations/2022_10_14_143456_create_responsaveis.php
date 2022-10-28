@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('centro_de_custos', function (Blueprint $table) {
-            $table->foreign('responsavel_id')->references('id')->on('responsaveis');
+        Schema::create('responsaveis', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome',50);
+            $table->string('matricula', 20);
+            $table->string('email');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('centro_de_custos', function (Blueprint $table) {
-            $table->dropConstrainedForeignId('responsavel_id');
-        });
+        Schema::dropIfExists('responsaveis');
     }
 };

@@ -50,11 +50,11 @@
                                 
                                 @can('admin')
 
-                                     <a class="btn btn-sm btn-primary" href="{{ route('centros-de-custo.show', $cc->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $cc->name }}">
+                                     <a class="btn btn-sm btn-info" href="{{ route('centros-de-custo.show', $cc->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $cc->name }}">
                                         <i class="bi bi-eye-fill"></i>
                                     </a>
 
-                                    <a class="btn btn-sm btn-secondary" href="{{ route('centros-de-custo.edit', $cc->id) }}" data-toggle="tooltip" title="Editar {{ $cc->name }}">
+                                    <a class="btn btn-sm btn-primary" href="{{ route('centros-de-custo.edit', $cc->id) }}" data-toggle="tooltip" title="Editar {{ $cc->name }}">
                                         <i class="bi bi-pencil-fill"></i>
                                     </a> 
 

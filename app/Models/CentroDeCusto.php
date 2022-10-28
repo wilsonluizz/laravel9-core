@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CentroDeCusto extends Model
 {
-    use HasFactory;
+    use SoftDeletes;
     protected $fillable = ['nome', 'codigo', 'responsavel_id'];
 
 
     public function equipamento(){
-        return $this->belongsTo('App\Models\Equipamento', 'centro_de_custo_id');
+        return $this->hasMany('App\Models\Equipamento', 'centro_de_custo_id');
     }
 
     public function responsavel(){

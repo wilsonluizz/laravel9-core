@@ -3,11 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 // Permissões
@@ -15,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
+    use HasApiTokens, Notifiable, HasRoles, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -46,4 +44,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function equipamento(){
+        return $this->hasMany('App\Models\Movimentacao', 'responsavel_id');
+    }
+
+    public function movimentacao(){
+        return $this->hasMany('App\Models\Movimentacao', 'responsavel_id');
+    }
+
+    public function historico(){
+        return $this->hasMany('App\Models\HistoricoEquipamento', 'responsavel_id');
+    }
+
 }

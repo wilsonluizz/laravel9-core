@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('historicos', function (Blueprint $table) {
+        Schema::create('tipo_movimentacao', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo_movimentacao');
-            $table->string('motivo_movimentacao');
-            $table->unsignedBigInteger('equipamento_id');
-            $table->unsignedBigInteger('responsavel_id');
+            $table->string('tipo');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('historicos');
+        Schema::dropIfExists('tipo_movimentacao');
     }
 };

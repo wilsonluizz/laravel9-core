@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\UnidadeFederativa;
 use Illuminate\Database\Seeder;
 use Database\Seeders\DeployCore;
 use Database\Seeders\InventarioSeeder;
@@ -18,8 +20,9 @@ class DatabaseSeeder extends Seeder
     {
 
         DeployCore::run();
+        $this->call(UnidadeFederativaSeeder::class);
         InventarioSeeder::run();
-
+        
 
         // \App\Models\User::factory(10)->create();
 

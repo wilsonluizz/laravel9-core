@@ -29,12 +29,12 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th class="col-3">Nome</th>
+                            <th class="col-2">Nome</th>
                             <th class="col-2">Modelo</th>
-                            <th class="col-3">Localidade</th>
+                            <th class="col-2">Localidade</th>
                             <th class="col-2">Centro de custo</th>
-                            <th class="col-1">Responsável</th>
-                            <th class="col-2 text-center">Ações</th>
+                            <th class="col-2">Responsável</th>
+                            <th class="col-3 text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,12 +52,15 @@
                                 
                                 @can('admin')
 
-                                     <a class="btn btn-sm btn-primary" href="{{ route('equipamentos.show', $equip->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $equip->name }}">
+                                     <a class="btn btn-sm btn-info" href="{{ route('equipamentos.show', $equip->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $equip->name }}">
                                         <i class="bi bi-eye-fill"></i>
                                     </a>
 
-                                    <a class="btn btn-sm btn-secondary" href="{{ route('equipamentos.edit', $equip->id) }}" data-toggle="tooltip" title="Editar {{ $equip->name }}">
+                                    <a class="btn btn-sm btn-primary" href="{{ route('equipamentos.edit', $equip->id) }}" data-toggle="tooltip" title="Editar {{ $equip->name }}">
                                         <i class="bi bi-pencil-fill"></i>
+                                    </a> 
+                                    <a class="btn btn-sm btn-primary" href="{{ route('movimentacao.create', $equip->id) }}" data-toggle="tooltip" title="Editar {{ $equip->name }}">
+                                        <i class="bi bi-arrows-move"></i>
                                     </a> 
 
                                 @else

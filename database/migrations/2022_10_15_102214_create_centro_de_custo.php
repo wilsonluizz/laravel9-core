@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('codigo', 10);
             $table->unsignedBigInteger('responsavel_id');
             $table->timestamps();
+            $table->softdeletes();
+
+            $table->foreign('responsavel_id')->references('id')->on('responsaveis');
         });
     }
 
@@ -29,6 +32,11 @@ return new class extends Migration
      */
     public function down()
     {
+
+        Schema::table('centro_de_custos', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('responsavel_id');
+        });
+        
         Schema::dropIfExists('centro_de_custos');
     }
 };

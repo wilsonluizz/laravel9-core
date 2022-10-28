@@ -43,7 +43,7 @@ class LocalidadeController extends Controller
 
         
 
-        $r = Localidade::create([
+        $localidade = Localidade::create([
             'nome' => ucwords($request->nome),
             'cidade' => ucwords($request->cidade),
             'uf_id' => $request->select_uf,

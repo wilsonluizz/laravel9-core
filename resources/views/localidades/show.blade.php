@@ -20,7 +20,7 @@
                                 </li>
                             </ul>
                             
-                            <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i class="bi bi-back"></i></button>
+                            <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i class="bi bi-reply-fill"></i></button>
                         </div>
                     </div>
                 </div>
