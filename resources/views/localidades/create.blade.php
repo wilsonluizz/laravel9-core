@@ -15,12 +15,12 @@
                             @csrf
                             <div class="row my-2">
                                 <div class="col-3 my-2">
-                                    <input type="text" maxlength="50" name="nome" class="form-control"
-                                        placeholder="Nome" required>
+                                    <input type="text" maxlength="50" name="nome" class="form-control" placeholder="Nome" required 
+                                    value="{{ old('nome') }}">
                                 </div>
                                 <div class="col-3 my-2">
-                                    <input type="text" maxlength="50" name="cidade" class="form-control"
-                                        placeholder="cidade" required>
+                                    <input type="text" maxlength="50" name="cidade" class="form-control" placeholder="cidade" required 
+                                    value="{{ old('cidade') }}">
                                 </div>
                                 <div class="col-3 my-2">
 
@@ -28,15 +28,14 @@
 
                                     <select name="select_uf" class="form-select" id="select_uf"
                                         aria-label="Floating label select example">
-                                        <option selected>Selecione UF</option>
+                                        <option value="">Selecione UF</option>
                                         @foreach ($ufs as $uf)
-                                            <option value="{{ $uf->id }}">{{ $uf->uf }}</option>
+                                            <option value="{{ $uf->id }}" {{ old('select_uf') == $uf->id ? 'selected' : null }}>{{ $uf->uf }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-3 my-2">
-                                    <input type="text" maxlength="50" name="cep" class="form-control"
-                                        placeholder="Cep" required>
+                                    <input type="text" maxlength="50" name="cep" class="form-control" placeholder="Cep" required value="{{ old('cep') }}">
                                 </div>
                             </div>
 

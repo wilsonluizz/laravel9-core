@@ -23,7 +23,7 @@
                                 <div class="col-6">
                                     <label for="select_tipo_mov" class="form-label">Tipo de movimentação</label>
                                     <select name="select_tipo_mov" id="select_tipo_mov" class="form-select">
-                                        <option selected>Selecione o tipo de movimentação</option>
+                                        <option value="">Selecione o tipo de movimentação</option>
                                         @foreach ($tipo_mov as $tipo)
                                             <option value="{{ $tipo->id }}">{{ $tipo->tipo }}</option>
                                         @endforeach

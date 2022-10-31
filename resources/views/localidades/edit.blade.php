@@ -28,7 +28,7 @@
                                 <div class="col-3 ">
                                     <select name="select_uf" class="form-select my-2" id="select_uf"
                                         aria-label="Floating label select example">
-                                        <option selected>Selecione UF</option>
+                                        <option value="">Selecione UF</option>
                                         @foreach ($ufs as $uf)
                                             <option value="{{ $uf->id }}"  {{ $uf->id == $local->uf->id ? 'selected' : '' }} >{{ $uf->uf }}</option>
                                         @endforeach

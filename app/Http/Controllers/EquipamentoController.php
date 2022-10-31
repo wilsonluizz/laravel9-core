@@ -54,22 +54,32 @@ class EquipamentoController extends Controller
      */
     public function store(Request $request)
     {           
-            // dd($request);
+            // dd($request->all());
 
-            // $request->validate([
-            //     'nome' => 'required',
-            //     'categoria_id' => 'required',
-            //     'tipo_id' => 'required',
-            //     'marca_id' => 'required',
-            //     'descricao' => 'required',
-            //     'modelo' => 'required',
-            //     'numero_serie' => 'required',
-            //     'centro_de_custo_id' => 'required',
-            //     'localidade_id' => 'required',
-            //     'responsavel_id' => 'required',
-            //     'nota_fiscal_id' => 'required',
+            $request->validate([
+                'nome' => 'required',
+                'select_categoria' => 'required',
+                'select_tipo' => 'required',
+                'select_marca' => 'required',
+                'descricao' => 'required',
+                'modelo' => 'required',
+                'numero_serie' => 'required|integer',
+                'select_cc' => 'required',
+                'select_local' => 'required',
+                'select_resp' => 'required',
+                'select_nota_fiscal' => 'required',
                 
-            // ]);
+            ], [], [
+             'nome' => '"Nome"',   
+            'select_categoria' => '"Categoria"',
+            'select_tipo' => '"Tipo"',
+            'select_marca' => '"Marca"',
+            'numero_serie' => '"Numero de série"',
+            'select_cc' => '"Centro de custo"',
+            'select_local' => '"Localidade"', 
+            'select_resp' => '"Responsável"',
+            'select_nota_fiscal' => '"Numero de nota fiscal"']);
+
 
             $equipamento = Equipamento::create([
             'nome' => ucwords($request->nome),
@@ -140,6 +150,30 @@ class EquipamentoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nome' => 'required',
+            'select_categoria' => 'required',
+            'select_tipo' => 'required',
+            'select_marca' => 'required',
+            'descricao' => 'required',
+            'modelo' => 'required',
+            'numero_serie' => 'required|integer',
+            'select_cc' => 'required',
+            'select_local' => 'required',
+            'select_resp' => 'required',
+            'select_nota_fiscal' => 'required',
+            
+        ], [], [
+         'nome' => '"Nome"',   
+        'select_categoria' => '"Categoria"',
+        'select_tipo' => '"Tipo"',
+        'select_marca' => '"Marca"',
+        'numero_serie' => '"Numero de série"',
+        'select_cc' => '"Centro de custo"',
+        'select_local' => '"Localidade"', 
+        'select_resp' => '"Responsável"',
+        'select_nota_fiscal' => '"Numero de nota fiscal"']);
+
         $equipamento = Equipamento::find($id);
         $equipamento ->nome = ucwords($request->nome);
         $equipamento ->categoria_id = $request->select_categoria;

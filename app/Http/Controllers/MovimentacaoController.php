@@ -44,6 +44,18 @@ class MovimentacaoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'select_equip' => 'required',
+            'select_tipo_mov' => 'required',
+            'motivo' => 'required',
+            
+            
+        ], [], [
+         'select_equip' => '"Equipamento"',   
+        'select_tipo_mov' => '"Tipo de movimentação"',
+        'motivo' => '"Motivo"',
+        ]);
+
         Movimentacao::create([
             'motivo_movimentacao' => $request->motivo,
             'responsavel_id' => \Auth::user()->id,

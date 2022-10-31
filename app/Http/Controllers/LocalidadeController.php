@@ -39,7 +39,19 @@ class LocalidadeController extends Controller
     public function store(Request $request)
     {
        
-        
+        $request->validate([
+            'nome' => 'required',
+            'cidade' => 'required',
+            'select_uf' => 'required',
+            'cep' => 'required|numeric',
+            
+            
+        ], [], [
+         'nome' => '"Nome"',   
+        'cidade' => '"Cidade"',
+        'select_uf' => '"UF"',
+        'cep' => '"Cep',    
+    ]);
 
         
 
@@ -87,9 +99,21 @@ class LocalidadeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $request->validate([
+            'nome' => 'required',
+            'cidade' => 'required',
+            'select_uf' => 'required',
+            'cep' => 'required|numeric',
+            
+            
+        ], [], [
+         'nome' => '"Nome"',   
+        'cidade' => '"Cidade"',
+        'select_uf' => '"UF"',
+        'cep' => '"Cep',    
+    ]);
+
         $local = Localidade::find($id);
-        
         $local->nome = $request->nome;
         $local->cidade = $request->cidade;
         $local->uf_id = $request->select_uf;

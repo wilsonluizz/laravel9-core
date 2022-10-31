@@ -36,6 +36,16 @@ class ResponsavelController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nome' => 'required|string',
+            'matricula' => 'required|integer',
+            'email' => 'required|email',
+        ], [],[
+            'nome' => 'Nome',
+            'matricula' => 'Matricula',
+            'email' => 'E-mail',
+        ]);
+
         $responsavel = Responsavel::create([
             'nome' => ucwords($request->nome),
             'matricula' => ucwords($request->matricula),
@@ -78,6 +88,16 @@ class ResponsavelController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nome' => 'required|string',
+            'matricula' => 'required|integer',
+            'email' => 'required|email',
+        ], [],[
+            'nome' => 'Nome',
+            'matricula' => 'Matricula',
+            'email' => 'E-mail',
+        ]);
+
         $responsavel = Responsavel::find($id);
 
         $responsavel->nome = $request->nome;

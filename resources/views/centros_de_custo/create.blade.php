@@ -15,17 +15,17 @@
                             @csrf
                             <div class="row">
                                 <div class="col-md-4 my-2">
-                                    <input type="text" maxlength="50" name="nome" class="form-control" placeholder="Nome" required>
+                                    <input type="text" maxlength="50" name="nome" class="form-control" placeholder="Nome" value="{{ old('nome') }}" required>
                                 </div>
                                 <div class="col-4 my-2">
-                                    <input type="text   " name="codigo" class="form-control" placeholder="Codigo" required>
+                                    <input type="text   " name="codigo" class="form-control" placeholder="Codigo" required value="{{ old('codigo') }}">
                                 </div>
                                 <div class="col-md-4 my-2">
                                     <select name="select_resp" class="form-select" id="select_resp"
                                         aria-label="Floating label select example">
-                                        <option selected>Selecione responsável </option>
+                                        <option value="">Selecione responsável </option>
                                         @foreach ($responsaveis as $resp)
-                                            <option value="{{ $resp->id }}">{{ $resp->nome }}</option>
+                                            <option value="{{ $resp->id }}" {{ old('select_resp') == $resp->id ? 'selected' : null }}>{{ $resp->nome }}</option>
                                         @endforeach
                                     </select>
                                 </div>

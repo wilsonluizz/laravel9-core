@@ -15,13 +15,14 @@
                             @csrf
                             <div class="row">
                                 <div class="col-4 my-2">
-                                    <input type="text" maxlength="50" name="nome" class="form-control" placeholder="Nome" required>
+                                    <input type="text" maxlength="50" name="nome" class="form-control" placeholder="Nome" required value="{{ old('nome') }}">
                                 </div>
                                 <div class="col-4 my-2">
-                                    <input type="text" maxlength="50" name="matricula" class="form-control" placeholder="matricula" required>
+                                    <input type="text" maxlength="50" name="matricula" class="form-control" placeholder="matricula" required value="{{ old('matricula') }}">
                                 </div>
                                 <div class="col-4 my-2">
-                                    <input type="email" name="email" class="form-control" placeholder="email" required>
+                                    <input type="email" name="email" class="form-control" placeholder="email" required
+                                    value="{{ old('email') }}">
                                 </div>
                             </div>
 

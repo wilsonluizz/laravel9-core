@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CentroDeCusto;
 use App\Models\Responsavel;
 
+
 class CentroDeCustoController extends Controller
 {
     /**
@@ -38,6 +39,19 @@ class CentroDeCustoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nome' => 'required',
+            'codigo' => 'required|integer',
+            'select_resp' => 'required',
+            
+            
+        ], [], [
+         'nome' => '"Nome"',   
+        'codigo' => '"Codigo"',
+        'select_resp' => 'Responsável',
+    ]);
+
+
         $centro_custo = CentroDeCusto::create([
             'nome' => $request->nome,
             'codigo' => $request->codigo,
@@ -80,11 +94,20 @@ class CentroDeCustoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $centro_de_custo = CentroDeCusto::find($id);
-        
+        $request->validate([
+            'nome' => 'required',
+            'codigo' => 'required|integer',
+            'select_resp' => 'required',
+            
+            
+        ], [], [
+         'nome' => '"Nome"',   
+        'codigo' => '"Codigo"',
+        'select_resp' => 'Responsável',
+    ]);
 
-        $centro_de_custo->nome = $request->nome;
+        $centro_de_custo = CentroDeCusto::find($id);
+         $centro_de_custo->nome = $request->nome;
         $centro_de_custo->responsavel_id = $request->select_resp;
         $centro_de_custo->codigo = $request->codigo;
         $centro_de_custo->save();
