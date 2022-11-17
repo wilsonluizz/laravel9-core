@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('notas_fiscais', function (Blueprint $table) {
             $table->id();
             $table->string('numero', 50);
-            $table->double('valor', 8, 2);
+            $table->string('valor', 20);
             $table->string('sc_origem');
             $table->dateTime('data_emissao')->nullable();
             $table->timestamps();

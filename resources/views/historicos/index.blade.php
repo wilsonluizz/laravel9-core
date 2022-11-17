@@ -9,7 +9,7 @@
                     <h2 class="text-center">Historicos</h2>
                 </div>
                 <div class="card-body">
-                    <table class="table">
+                    <table class="table table-hover align-middle">
                         <thead>
                             <th>Atividade</th>
                             <th>Equipamento</th>

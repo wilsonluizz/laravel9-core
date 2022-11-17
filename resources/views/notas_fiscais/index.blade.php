@@ -1,8 +1,5 @@
 @extends('layouts.app')
 
-
-
-
 @section('content')
 <div class="row row-cols-1 pb-3">
     <div class="col">
@@ -11,16 +8,16 @@
             <div class="card-header pb-1">
                 <div class="row">
                     <div class="col-10">
-                        <h3 class="pt-1"><i class="bi bi-currency-dollar"></i> Centros de custo</h3>
+                        <h3 class="pt-1"><i class="bi bi-receipt-cutoff"></i> Notas Fiscais</h3>
                     </div>
                     <div class="col-2 text-end">
-                        <a class="btn btn-primary" href="{{ route('centros-de-custo.create') }}" data-toggle="tooltip" title="Criar novo usuário">
+                        <a class="btn btn-primary" href="{{ route('notas-fiscais.create') }}" data-toggle="tooltip" title="Criar novo usuário">
                             <span class="d-lg-none">
                                 <i class="bi bi-plus-lg"></i>
                             </span>
                             <span class="d-none d-lg-block">
                                 <i class="bi bi-plus-lg me-1"></i>
-                                Novo centro de custo
+                                Nova nota fiscal
                             </span>
                         </a>
                     </div>
@@ -28,39 +25,41 @@
             </div>
 
             <div class="card-body table-responsive">
-                <table class="table table-striped table-hover align-middle">
+                <table class="table table-hover align-middle">
                     <thead>
                         <tr>
-                            <th class="col-3">Nome</th>
-                            <th class="col-3">Código</th>
-                            <th class="col-3">Responsável</th>
-                            <th class="col-1">Criado em</th>
+                            <th class="col-2">Numero</th>
+                            <th class="col-2">Valor</th>
+                            <th class="col-">SC. origem</th>
+                            <th class="col-2">Criado em</th>
                             <th class="col-2 text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($centro_de_custo as $cc)
+                        @foreach ($notas_fiscais as $nota)
                         <tr>
-                            <td>{{ $cc->nome }}</td>
-                            <td>{{ $cc->codigo }}</td>
-                            <td>{{ $cc->responsavel->nome}}</td>
+                            <td>{{  $nota->numero }}</td>
+                            <td>R$ {{  $nota->valor }}</td>
+                            <td>{{  $nota->sc_origem }}</td>
                             
-                            <td>{{ date('d/m/Y', strtotime($cc->created_at)) }}</td>
+                            <td>{{ date('d/m/Y', strtotime( $nota->created_at)) }}</td>
                             <td class="text-center">
                                 
                                 @can('admin')
 
-                                     <a class="btn btn-sm btn-info" href="{{ route('centros-de-custo.show', $cc->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $cc->name }}">
+                                     <a class="btn btn-sm btn-info" href="{{ route('notas-fiscais.show',  $nota->id) }}" data-toggle="tooltip" title="Ver detalhes de {{  $nota->name }}">
                                         <i class="bi bi-eye-fill"></i>
                                     </a>
 
-                                    <a class="btn btn-sm btn-primary" href="{{ route('centros-de-custo.edit', $cc->id) }}" data-toggle="tooltip" title="Editar {{ $cc->name }}">
+                                    
+
+                                    <a class="btn btn-sm btn-primary" href="{{ route('notas-fiscais.edit',  $nota->id) }}" data-toggle="tooltip" title="Editar {{  $nota->name }}">
                                         <i class="bi bi-pencil-fill"></i>
                                     </a> 
 
                                 @else
 
-                                     <a class="btn btn-sm btn-primary" href="{{ route('centros-de-custo.show', $cc->id) }}" data-toggle="tooltip" title="Ver detalhes de {{ $cc->name }}">
+                                     <a class="btn btn-sm btn-primary" href="{{ route('notas-fiscais.show',  $nota->id) }}" data-toggle="tooltip" title="Ver detalhes de {{  $nota->name }}">
                                         <i class="bi bi-eye-fill"></i>
                                     </a> 
 

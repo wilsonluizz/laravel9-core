@@ -26,6 +26,9 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('responsaveis.*') ? 'active' : '' }}" href="{{ route('responsaveis.index') }}">Responsáveis</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('notas-fiscais.*') ? 'active' : '' }}" href="{{ route('notas-fiscais.index') }}">Notas Fiscais</a>
+                </li>
             </ul>
 
 

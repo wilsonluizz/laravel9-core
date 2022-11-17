@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CentroDeCusto;
+use App\Models\Equipamento;
 use App\Models\Responsavel;
 use Illuminate\Http\Request;
 
@@ -115,8 +117,16 @@ class ResponsavelController extends Controller
      */
     public function destroy($id)
     {
-        Responsavel::find($id)->delete();
-        return redirect()->route('responsaveis.index')->with('info', 'Responsável excluído com sucesso!');
+        $responsavel = Responsavel::find($id);
+        $equipamento = Equipamento::where('responsavel_id', $responsavel->id)->get();
+        $centro_custo = CentroDeCusto::where('responsavel_id', $responsavel->id)->get();
+        if ($equipamento->count() == 0 and $centro_custo->count() == 0) {
+            $responsavel->delete();
+            return redirect()->route('responsaveis.index')->with('success', 'Responsável excluído com sucesso!');
+        }
+        return redirect()->route('responsaveis.index')->with('error', 'Responsável não pode ser excluído, pois está em uso no sistema');
+
+        
         
     }
 }

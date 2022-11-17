@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CentroDeCusto;
 use App\Models\Responsavel;
+use App\Models\Equipamento;
 
 
 class CentroDeCustoController extends Controller
@@ -122,7 +123,14 @@ class CentroDeCustoController extends Controller
      */
     public function destroy($id)
     {
-        CentroDeCusto::find($id)->delete();
-        return redirect()->route('centros-de-custo.index'); 
+        $centro_de_custo = CentroDeCusto::find($id);
+        $equipamento = Equipamento::where('centro_de_custo_id', $centro_de_custo->id )->get();
+        
+        if ($equipamento->count() == 0) {
+            $centro_de_custo->delete();
+
+            return redirect()->route('centros-de-custo.index')->with('success', 'Centro de custo excluído com sucesso!');
+        }
+        return redirect()->route('centros-de-custo.index')->with('error', 'Centro de custo não pode ser apagado, pois está registrado em um equipamento.'); 
     }
 }

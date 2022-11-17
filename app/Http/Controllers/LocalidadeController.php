@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Localidade;
 use App\Models\UnidadeFederativa;
 use App\Models\Responsavel;
+use App\Models\Equipamento;
 
 class LocalidadeController extends Controller
 {
@@ -130,7 +131,15 @@ class LocalidadeController extends Controller
      */
     public function destroy($id)
     {
-        Localidade::find($id)->delete();
-        return redirect()->route('localidades.index'); 
+        
+        $localidade = Localidade::find($id);
+        $equipamento = Equipamento::where('localidade_id', $localidade->id)->get();
+        if ($equipamento->count() == 0) {
+            $localidade->delete();
+
+            return redirect()->route('localidades.index')->with('success', 'Localidade foi excluída com sucesso!' );
+        }  
+        return redirect()->route('localidades.index')->with('error', 'Localidade não pode ser excluída, pois está registrada em um equipamento.' );
+         
     }
 }

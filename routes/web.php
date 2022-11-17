@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Route;
     Route::resource('inventario', 'App\Http\Controllers\InventarioController');
     Route::resource('equipamentos', 'App\Http\Controllers\EquipamentoController');
     Route::resource('responsaveis', 'App\Http\Controllers\ResponsavelController');
+    Route::resource('notas-fiscais','App\Http\Controllers\NotaFiscalController');
     
     Route::resource('equipamentos/{id}/historicos', 'App\Http\Controllers\HistoricoController', ['name' => ['index' => 'historico.index']]);
     

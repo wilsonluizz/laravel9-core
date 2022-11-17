@@ -25,7 +25,7 @@
             </div>
 
             <div class="card-body table-responsive">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover align-middle">
                     <thead>
                         <tr>
                             <th class="col-2">Nome</th>

@@ -32,7 +32,7 @@
                         <h2 class="text-center">Movimentações</h2>
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table table-hover align-middle">
                             <thead>
                                 
                                 <th>Tipo de movimentação</th>

@@ -18,7 +18,7 @@
                                     <input type="text" maxlength="50" name="nome" class="form-control" placeholder="Nome" value="{{ old('nome') }}" required>
                                 </div>
                                 <div class="col-4 my-2">
-                                    <input type="text   " name="codigo" class="form-control" placeholder="Codigo" required value="{{ old('codigo') }}">
+                                    <input type="text" name="codigo" class="form-control" placeholder=" Digite o codigo" required value="{{ old('codigo') }}">
                                 </div>
                                 <div class="col-md-4 my-2">
                                     <select name="select_resp" class="form-select" id="select_resp"
@@ -33,7 +33,9 @@
 
                             <button type="submit" class="btn btn-success mt-3"><i class="bi bi-check"></i></button>
                             
-                            <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i class="bi bi-reply-fill"></i></button>
+                            <a class="btn btn-info mt-3" href="{{ route('centros-de-custo.index') }}">
+                                <i class="bi bi-reply-fill"></i>
+                            </a> 
                             
                         </form>
                     </div>

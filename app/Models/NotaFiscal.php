@@ -10,6 +10,7 @@ class NotaFiscal extends Model
     use SoftDeletes;
     
     protected $table = 'notas_fiscais';
+    protected $fillable = ['numero','valor', 'sc_origem', 'data_emissao'];
 
     public function equipamento(){
         return $this->belongsTo('App\Models\Equipamento', 'nota_fiscal_id');

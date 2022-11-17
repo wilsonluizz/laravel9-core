@@ -101,8 +101,9 @@
                             <div class="col-12">
                                 <button form="form_create" type="submit" class="btn btn-success mt-3"><i
                                         class="bi bi-check"></i></button>
-                                <button onclick="javascript:history.back(-1) " type="button"
-                                    class="btn btn-info mt-3"><i class="bi bi-reply-fill"></i></button>
+                                        <a class="btn btn-info mt-3" href="{{ route('equipamentos.index') }}">
+                                            <i class="bi bi-reply-fill"></i>
+                                        </a> 
                             </div>
                         </form>
                     </div>

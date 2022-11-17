@@ -43,7 +43,9 @@
                                 class="bi bi-check"></i></button>
 
 
-                        <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i class="bi bi-reply-fill"></i></button>
+                                <a class="btn btn-info mt-3" href="{{ route('centros-de-custo.index') }}">
+                                    <i class="bi bi-reply-fill"></i>
+                                </a> 
 
 
                         <button type="button" class="btn btn-danger delete-btn mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>

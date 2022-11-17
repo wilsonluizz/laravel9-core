@@ -4,49 +4,46 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-8">
+            <div class="col-9">
                 <div class="card">
                     <div class="card-header pb-1">
                         <div>
-                            <h3 class="pt-1"><i class="bi bi-pencil"></i> Editar Responsável</h3>
+                            <h3 class="pt-1"><i class="bi bi-pencil"></i> Editar Nota fiscal</h3>
                         </div>
                     </div>
                     <div class="card-body table-responsive">
-                        <form action="{{ route('responsaveis.update', $responsavel->id) }}" id="editar"
+                        <form action="{{ route('notas-fiscais.update', $nota->id) }}" id="editar"
                             method="POST">
                             @csrf
                             @method('put')
                             <div class="row">
-                                <div class="col-4 my-2">
-                                    <input type="text" maxlength="50" name="nome" class="form-control"
-                                        value="{{ $responsavel->nome }}"" required>
+                                <div class="col-3 my-2">
+                                    <input disabled type="text" maxlength="50" name="numero" class="form-control"
+                                        value="{{ $nota->numero }}"" required>
                                 </div>
-                                <div class="col-4 my-2">
-                                    <input type="text" maxlength="50" name="matricula" class="form-control"
-                                        value="{{ $responsavel->matricula }}" required>
+                                <div class="col-3 my-2">
+                                    <input disabled type="text" maxlength="50" name="valor" class="form-control"
+                                        value="R$ {{ $nota->valor }}" required>
                                 </div>
-                                <div class="col-4 my-2">
-                                    <input type="text   " name="email" class="form-control"
-                                        value="{{ $responsavel->email }}" required>
+                                <div class="col-3 my-2">
+                                    <input disabled type="text   " name="sc_origem" class="form-control"
+                                        value="{{ $nota->sc_origem }}" required>
+                                </div>
+                                <div class="col-3 my-2">
+                                    <input disabled type="dateTime" name="data_emissao" class="form-control"
+                                        value="{{ $nota->data_emissao }}" required>
                                 </div>
                             </div>
 
                         </form>
 
-                        
-
-                        <button form="editar" type="submit" class="btn btn-success mt-3"><i
-                                class="bi bi-check"></i></button>
-
-
                         <button onclick="javascript:history.back(-1) " type="button" class="btn btn-info mt-3"><i class="bi bi-reply-fill"></i></button>
 
 
-                        <button type="button" class="btn btn-danger delete-btn mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
+                        <button type="button" class="btn btn-md btn-danger delete-btn mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
 
                         <!-- Modal -->
-                        <form action="{{ route('responsaveis.destroy', $responsavel->id) }} " id="apagar"
-                            method="POST">
+                        <form action="{{ route('notas-fiscais.destroy',  $nota->id) }} " id="apagar" method="POST">
                             @csrf
                             @method('DELETE')
                         </form>
@@ -55,12 +52,12 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Você está prestes a excluir este responsável</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Você está prestes a excluir um documento</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <h4>Tem certeza que deseja apagar o responsável ? </h4>
+                                        <h4>Tem certeza que deseja apagar esta nota fiscal? </h4>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-info" data-bs-dismiss="modal"><i class="bi bi-reply-fill"></i></button>
@@ -80,3 +77,4 @@
 
 
 
+<button type="button" class="btn btn-sm btn-danger delete-btn " data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash"></i></button>
