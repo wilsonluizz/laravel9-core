@@ -4,25 +4,23 @@ namespace App\View\Components\Admin\Forms;
 
 use Illuminate\View\Component;
 
-class Perfil extends Component
+class Perms extends Component
 {
+
+    public $type;
+    public $permissao;
+    public $perfis;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-
-    public $type;
-    public $perfil;
-    public $perms;
-    public $usuarios;
-
-    public function __construct($type = null, $perfil = null, $perms = null, $usuarios = null)
+    public function __construct($type = null, $permissao = null, $perfis = null)
     {
         $this->type = $type;
-        $this->perfil = $perfil;
-        $this->perms = $perms;
-        $this->usuarios = $usuarios;
+        $this->permissao = $permissao;
+        $this->perfis = $perfis;
     }
 
     /**
@@ -32,6 +30,6 @@ class Perfil extends Component
      */
     public function render()
     {
-        return view('components.admin.forms.perfil');
+        return view('components.admin.forms.perms');
     }
 }
